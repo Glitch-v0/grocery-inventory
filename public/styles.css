@@ -1,0 +1,58 @@
+:root {
+    font-size: 10px;
+}
+
+h1 {
+    font-size: 5rem;
+    text-align: center;
+}
+
+p {
+    font-size: 2.5rem;
+}
+
+@media screen and (max-width: 600px) {
+    h1 {
+        font-size: 4rem;
+        text-align: center;
+    }
+    
+    p {
+        font-size: 2rem;
+    }
+}
+body {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background-color: rgb(213, 255, 239);
+    align-items: center;
+}
+
+#display-table {
+    background-color: rgb(255, 255, 255);
+    align-content: center;
+}
+
+.category-container {
+    display: grid;
+    font-weight: bolder;
+    text-align: start;
+    grid-template-columns: 1.5fr 1fr;
+    padding: 0px 10px;
+    border: 1px solid rgb(0, 0, 0);
+}
+
+.display-container:nth-child(odd), .display-container:nth-child(even) {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    padding: 0px 10px;
+    border: 1px solid rgb(0, 0, 0);
+}
+.display-container:nth-child(even) {
+  background-color: rgb(213, 255, 239);
+}
+
+.display-container:nth-child(odd) {
+    background-color: rgba(255, 255, 255);
+  }

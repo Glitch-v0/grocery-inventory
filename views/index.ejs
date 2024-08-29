@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grocery Inventory</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Items and Categories</h1>
+    <div id="display-table">
+        <div class="category-container">
+            <p>Item</p>
+            <p>Category</p>
+        </div>
+        <% groceryItems.forEach(item => { %>
+            <div class="display-container">
+                <p><%= item.name %></p>
+                <p><%= item.category %></p>
+            </div>
+        <% }) %>
+    </div>
+    
+</body>
+</html>
