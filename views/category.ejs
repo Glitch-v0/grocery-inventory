@@ -4,15 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Grocery Inventory</title>
-    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1><%= itemStats[0].name %> </h1>
-    <h1>Category: <%= itemStats[0].category %></h1>
+    <h1>Categories:</h1>
     <div>
-        <% itemStats.forEach(item => { %>
-            <h2>Region: <%= item.region_name %></h2>
-            <h2>Price: $<%= item.price %></h2>
+        <% itemCategories.forEach(category => { %>
+            <h2><%= category.category %></h2>
         <% }) %>
     </div>
     <a href="/">

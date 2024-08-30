@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Grocery Inventory</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
     <h1>Items and Categories</h1>
@@ -15,8 +15,13 @@
         </div>
         <% groceryItems.forEach(item => { %>
             <div class="display-container">
-                <p><%= item.name %></p>
-                <p><%= item.category %></p>
+                <a href="item/<%= item.id %> ">
+                    <p><%= item.name %></p>
+                </a>
+                <a href="category">
+                    <p><%= item.category %></p>
+                </a>
+                
             </div>
         <% }) %>
     </div>
