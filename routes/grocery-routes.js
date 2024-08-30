@@ -5,7 +5,8 @@ const groceryController = require("../controllers/grocery-controller");
 
 router.get("/", groceryController.getGroceryList);
 router.get("/item/:id", groceryController.getGroceryItem);
-router.get("/category", groceryController.getCategory)
+router.get("/categories", groceryController.getCategories);
+router.get("/warehouses", groceryController.getWarehouses)
 router.get("/*", (req, res) => {
     res.render("error", {errorCode: 404, errorMessage: "Invalid Page"});
 });

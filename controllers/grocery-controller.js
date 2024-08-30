@@ -22,13 +22,19 @@ async function getGroceryItem (req, res) {
     res.render("grocery-item", {itemStats: groceryItem});
 }
 
-async function getCategory (req, res) {
-    const categoryList = await db.getCategory();
+async function getCategories (req, res) {
+    const categoryList = await db.getCategories();
     res.render("category", {itemCategories: categoryList});
+}
+
+async function getWarehouses (req, res) {
+    const warehouseList = await db.getWarehouses();
+    res.render("warehouse", {warehouses: warehouseList});
 }
 
 module.exports = {
     getGroceryList,
     getGroceryItem,
-    getCategory
+    getCategories,
+    getWarehouses
 }
