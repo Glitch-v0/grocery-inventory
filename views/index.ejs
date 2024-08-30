@@ -7,24 +7,14 @@
     <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-    <h1>Items and Categories</h1>
-    <div id="display-table">
-        <div class="category-container">
-            <p>Item</p>
-            <p>Category</p>
-        </div>
-        <% groceryItems.forEach(item => { %>
-            <div class="display-container">
-                <a href="item/<%= item.id %> ">
-                    <p><%= item.name %></p>
-                </a>
-                <a href="categories">
-                    <p><%= item.category %></p>
-                </a>
-                
-            </div>
-        <% }) %>
-    </div>
-    
+    <%- include('navbar', { links: [
+        { href: '/items', text: 'Items' },
+        { href: '/categories', text: 'Categories' },
+        { href: '/warehouses', text: 'Warehouses' }
+    ] }) %>
+    <h1>Home</h1>
+    <p>You can access the grocery database by using
+        the navbar links above.</thead></p>
+        <p>Each link will show a list of all that is in the database.</p>
 </body>
 </html>

@@ -5,7 +5,7 @@ const db = require("../db/queries");
 
 async function getGroceryList (req, res) {
     const groceryList = await db.getList();
-    res.render("index", {groceryItems: groceryList});
+    res.render("items", {groceryItems: groceryList});
 }
 
 async function getGroceryItem (req, res) {

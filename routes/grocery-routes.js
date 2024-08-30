@@ -3,8 +3,11 @@ const express = require("express");
 const router = express.Router();
 const groceryController = require("../controllers/grocery-controller");
 
-router.get("/", groceryController.getGroceryList);
-router.get("/item/:id", groceryController.getGroceryItem);
+router.get("/", (req, res) => {
+    res.render("index");
+});
+router.get("/items", groceryController.getGroceryList);
+router.get("/items/:id", groceryController.getGroceryItem);
 router.get("/categories", groceryController.getCategories);
 router.get("/warehouses", groceryController.getWarehouses)
 router.get("/*", (req, res) => {
