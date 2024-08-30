@@ -7,6 +7,13 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1><% item.name %> </h1>
+    <h1><%= itemStats[0].name %> </h1>
+    <h2>Category: <%= itemStats[0].category %></h2>
+    <div>
+        <% itemStats.forEach(item => { %>
+            <h2>Region: <%= item.region_name %></h2>
+            <h2>Price: $<%= item.price %></h2>
+        <% }) %>
+    </div>
 </body>
 </html>
