@@ -8,13 +8,14 @@ router.get("/", (req, res) => {
 });
 router.get("/items", groceryController.getGroceryList);
 router.get("/items/:id", groceryController.getGroceryItem);
+// router.post("/:id", groceryController.updateGroceryItem);
 router.get("/categories", groceryController.getCategories);
 router.get("/warehouses", groceryController.getWarehouses)
 router.get("/*", (req, res) => {
     res.render("error", {errorCode: 404, errorMessage: "Invalid Page"});
 });
 // router.post("/", groceryController.addGroceryItem);
-// router.post("/:id", groceryController.updateGroceryItem);
+
 // router.delete("/:id", groceryController.deleteGroceryItem);
 
 module.exports = router;

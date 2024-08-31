@@ -1,18 +1,23 @@
 :root {
     font-size: 10px;
+    text-align: center;
 }
 
 h1 {
     font-size: 5rem;
-    text-align: center;
 }
 
 h2 {
     font-size: 4rem;
 }
 
-p {
+h3 {
+    font-size: 3rem;
+}
+
+p, label, input {
     font-size: 2.5rem;
+    text-wrap: balance;
 }
 
 button {
@@ -28,22 +33,41 @@ a:hover {
     color: rgb(128, 0, 255);
 }
 
+nav {
+    background-color: white;
+    width: 100%;
+}
 ul {
     display: flex;
     gap: 10vw;
     list-style: none;
     font-size: 3rem;
+    justify-content: center;
 }
+
 
 @media screen and (max-width: 600px) {
     h1 {
         font-size: 4rem;
-        text-align: center;
     }
-    
-    p {
+
+    h2 {
+        font-size: 3rem;
+    }
+
+    h3 {
         font-size: 2rem;
     }
+    
+    p, button {
+        font-size: 2rem;
+    }
+
+    ul, label, input {
+        font-size: 1.75rem;
+        gap: 2rem;
+    }
+
 }
 body {
     display: flex;
@@ -67,6 +91,20 @@ body {
     border: 1px solid rgb(0, 0, 0);
 }
 
+.form-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    place-items: center;
+    padding: 2rem;
+}
+
+#editButton, #submitButton {
+    margin: 1rem;
+    padding: 0.5rem;
+}
+
+
 .display-container:nth-child(odd), .display-container:nth-child(even) {
     display: grid;
     grid-template-columns: 1.5fr 1fr;
@@ -80,3 +118,7 @@ body {
 .display-container:nth-child(odd) {
     background-color: rgba(255, 255, 255);
   }
+
+.item-display {
+    text-align: start;
+}

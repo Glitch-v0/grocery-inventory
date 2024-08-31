@@ -7,16 +7,68 @@
     <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-    <h1><%= itemStats[0].name %> </h1>
-    <h1>Category: <%= itemStats[0].category %></h1>
-    <div>
-        <% itemStats.forEach(item => { %>
-            <h2>Region: <%= item.region_name %></h2>
-            <h2>Price: $<%= item.price %></h2>
-        <% }) %>
-    </div>
-    <a href="/">
-        <button>Back</button>
+    <%- include('navbar', { links: [
+        { href: '/', text: 'Home' },
+        { href: '/categories', text: 'Categories' },
+        { href: '/warehouses', text: 'Warehouses' }
+    ] }) %>
+    <!-- Edit Button to Unlock the Form -->
+    <button type="button" id="editButton">Edit Item Data</button>
+
+    <form action="/update-item" method="POST" id="itemForm">
+        <div class="form-container">
+            <!-- Editable Name Field -->
+            <label for="itemName">Item Name:</label>
+            <input type="text" id="itemName" name="itemName" value="<%= itemStats[0].name %>" disabled>
+        
+            <!-- Editable Category Field -->
+            <label for="category">Category:</label>
+            <input type="text" id="category" name="category" value="<%= itemStats[0].category %>" disabled>
+
+            <!-- Editable Prices for Each Region -->
+            <% itemStats.forEach((item, index) => { %>
+                <label for="price-<%= index %>"><%= item.region_name %> Pricing ($):</label>
+                <input type="text" id="price-<%= index %>" name="prices[<%= index %>]" value="<%= item.price %>" disabled>
+                <input type="hidden" name="regions[<%= index %>]" value="<%= item.region_name %>">
+                <input type="hidden" name="itemIds[<%= index %>]" value="<%= item.id %>">
+            <% }) %>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" id="submitButton" disabled>Update Item</button>
+    </form>
+
+    <!-- Back Button -->
+    <a href="/items">
+        <button type="button">Back</button>
     </a>
+
+    <!-- Handle Form Locking -->
+    <script>
+        const editButton = document.getElementById('editButton');
+        const editButtonText = 'Edit Item Data'
+        const submitButton = document.getElementById('submitButton');
+        const formElements = document.querySelectorAll('#itemForm input[type="text"]');
+        
+        editButton.addEventListener('click', function() {
+            if (editButton.textContent === editButtonText) {
+                // Enable inputs, submit button
+                formElements.forEach(element => element.disabled = false);
+                submitButton.disabled = false;
+                editButton.textContent = 'Cancel';
+            } else {
+                // Disable inputs, submit button
+                formElements.forEach(element => element.disabled = true);
+                submitButton.disabled = true;
+
+                // Revert button text
+                editButton.textContent = editButtonText;
+
+                // Reset form data
+                document.getElementById('itemForm').reset();
+            }
+        });
+    </script>
+
 </body>
 </html>

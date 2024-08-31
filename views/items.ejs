@@ -12,7 +12,7 @@
         { href: '/categories', text: 'Categories' },
         { href: '/warehouses', text: 'Warehouses' }
     ] }) %>
-    <h1>Items and Categories</h1>
+    <h1>All Items</h1>
     <div id="display-table">
         <div class="category-container">
             <p>Item</p>
@@ -20,11 +20,11 @@
         </div>
         <% groceryItems.forEach(item => { %>
             <div class="display-container">
-                <a href="item/<%= item.id %> ">
-                    <p><%= item.name %></p>
+                <a href="items/<%= item.id %> ">
+                    <p class="item-display"><%= item.name %></p>
                 </a>
                 <a href="categories">
-                    <p><%= item.category %></p>
+                    <p class="item-display"><%= item.category %></p>
                 </a>
                 
             </div>
