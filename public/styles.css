@@ -84,28 +84,30 @@ body {
     align-content: center;
 }
 
-.category-table {
+table {
+    margin: 1rem;
+    font-size: 2.5rem;
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+
+thead tr {
     background-color: var(--highlight-color);
 }
 
-.category-table:nth-child(odd) {
-    background-color: var(--highlight-color);
-}
-
-.category-table:nth-child(even) {
+tbody tr:nth-child(odd) {
     background-color: var(--background-color);
 }
 
-
-
-.category-container {
-    display: grid;
-    font-weight: bolder;
-    text-align: start;
-    grid-template-columns: 1.5fr 1fr;
-    padding: 0px 10px;
-    border: 1px solid rgb(0, 0, 0);
+tbody tr:nth-child(even) {
+    background-color: var(--highlight-color);
 }
+
+td, th {
+    border: 1px solid black;
+    padding: 1rem;
+}
+
 
 .form-container {
     display: grid;
@@ -119,21 +121,6 @@ body {
     margin: 1rem;
     padding: 0.5rem;
 }
-
-
-.display-container:nth-child(odd), .display-container:nth-child(even) {
-    display: grid;
-    grid-template-columns: 1.5fr 1fr;
-    padding: 0px 10px;
-    border: 1px solid rgb(0, 0, 0);
-}
-.display-container:nth-child(even) {
-  background-color: var(--background-color);
-}
-
-.display-container:nth-child(odd) {
-    background-color: var(--highlight-color);
-  }
 
 .item-display {
     text-align: start;

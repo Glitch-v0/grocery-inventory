@@ -12,12 +12,20 @@
         { href: '/items', text: 'Items' },
         { href: '/categories', text: 'Categories' },
     ] }) %>
-    <h1>Warehouses:</h1>
-    <div>
-        <% warehouses.forEach(warehouse => { %>
-            <h2><%= warehouse.region_name %></h2>
-        <% }) %>
-    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>Warehouses:</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% warehouses.forEach(warehouse => { %>
+                <tr>
+                    <td><%= warehouse.region_name %></td>
+            <% }) %>
+                </tr>
+        </tbody>
+    </table>
     <a href="/">
         <button>Back</button>
     </a>

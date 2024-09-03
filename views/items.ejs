@@ -12,24 +12,27 @@
         { href: '/categories', text: 'Categories' },
         { href: '/warehouses', text: 'Warehouses' }
     ] }) %>
-    <h1>All Items</h1>
-    <div id="display-table">
-        <div class="category-container">
-            <p>Item</p>
-            <p>Category</p>
-        </div>
-        <% groceryItems.forEach(item => { %>
-            <div class="display-container">
-                <a href="items/<%= item.id %> ">
-                    <p class="item-display"><%= item.name %></p>
-                </a>
-                <a href="categories">
-                    <p class="item-display"><%= item.category %></p>
-                </a>
-                
-            </div>
-        <% }) %>
-    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>Item</th>
+                <th>Category</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% groceryItems.forEach(item => { %>
+                <tr>
+                    <td>
+                        <a href="items/<%= item.id %> "><%= item.name %></a>
+                    </td>
+                    <td>
+                        <a href="categories"><%= item.category %></a>
+                    </td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+    
     
 </body>
 </html>
