@@ -9,9 +9,11 @@
 <body>
     <%- include('navbar', { links: [
         { href: '/', text: 'Home' },
+        { href: '/items', text: 'Items' },
         { href: '/categories', text: 'Categories' },
         { href: '/warehouses', text: 'Warehouses' }
     ] }) %>
+    <h1>Click on an item to view and edit its information.</h1>
     <table>
         <thead>
             <tr>
@@ -26,7 +28,7 @@
                         <a href="items/<%= item.id %> "><%= item.name %></a>
                     </td>
                     <td>
-                        <a href="categories"><%= item.category %></a>
+                        <%= item.category %>
                     </td>
                 </tr>
             <% }) %>
