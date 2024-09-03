@@ -9,6 +9,25 @@
 <body>
     <%- include('partials/navbar') %>
     <h1>Click on an item to view<br>and edit its information.</h1>
+    
+    <!-- Item Addition Table -->
+    <table>
+        <thead>
+            <tr>
+                <form action="/items" method="POST">
+                    <th>
+                        <label for="newItem">Add New Item</label>
+                    </th>
+                    <td colspan="2">
+                        <input type="text" name="newItem" required>
+                        <button type="submit">Add</button>
+                    </td>
+                </form>
+            </tr>
+        </thead>
+    </table>
+
+    <!-- Item/Category Table -->
     <table>
         <thead>
             <tr>
