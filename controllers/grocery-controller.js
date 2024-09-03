@@ -37,6 +37,7 @@ async function updateGroceryItem (req, res) {
 
 async function getCategories (req, res) {
     const categoryList = await db.getCategories();
+    //console.log(categoryList)
     res.render("category", {itemCategories: categoryList, error: null});
 }
 

@@ -11,26 +11,49 @@
     <% if (error) { %> 
         <%- include('partials/error', { error: error }) %>
     <% } %>
-    <form class="add-form" action="/categories" method="POST">
-        <label for="newCategory">Add New Category:</label>
-        <input type="text" id="newCategory" name="newCategory">
-        <button>Submit</button>
-    </form>
-    
+
+    <!-- Categories Table -->
     <table>
         <thead>
             <tr>
+                <!-- Add New Category Form in Header -->
+                <form action="/categories" method="POST">
+                    <th>
+                        <label for="newCategory">Add New Category:</label>
+                    </th>
+                    <td colspan="4">
+                        <input type="text" name="newCategory" required>
+                        <button type="submit">Add</button>
+                    </td>
+                </form>
+            </tr>
+            <tr>
                 <th>Categories:</th>
+                <th>Update</th>
+                <th>Delete</th>
             </tr>
         </thead>
         <tbody>
             <% itemCategories.forEach(category => { %>
                 <tr>
                     <td><%= category.category %></td>
-            <% }) %>
+                    <td>
+                        <form action="/categories/<%= category.id %>" method="POST">
+                            <input type="text" name="updatedCategory" value="<%= category.category %>" required>
+                            <button type="submit">Update</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="/categories/<%= category.id %>" method="POST">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <button type="submit">Delete</button>
+                        </form>
+                    </td>
                 </tr>
+            <% }) %>
         </tbody>
     </table>
+
     <a href="/">
         <button>Back</button>
     </a>
