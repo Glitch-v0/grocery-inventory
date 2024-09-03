@@ -8,16 +8,48 @@
 </head>
 <body>
     <%- include('partials/navbar') %>
+    <h1>Add a new category or modify an existing one.</h1>
+    <!-- Warehouse Addition Table -->
     <table>
         <thead>
             <tr>
-                <th>Warehouses:</th>
+                <form action="/categories" method="POST">
+                    <th>
+                        <label for="newCategory">Add New Warehouse</label>
+                    </th>
+                    <td colspan="2">
+                        <input type="text" name="newCategory" required>
+                        <button type="submit">Add</button>
+                    </td>
+                </form>
+            </tr>
+        </thead>
+    </table>
+
+    <!-- Warehouse Modification Table -->
+    <table>
+        <thead>
+            <tr>
+                <th>Warehouse</th>
+                <th>Update</th>
+                <th>Delete</th>
             </tr>
         </thead>
         <tbody>
             <% warehouses.forEach(warehouse => { %>
                 <tr>
                     <td><%= warehouse.region_name %></td>
+                    <td>
+                        <form action="/warehouses/<%= warehouse.id %>" method="POST">
+                            <input type="text" name="newName" value="<%= warehouse.region_name %>" required>
+                            <button type="submit" style="background: none; border: none; cursor: pointer;">
+                                <img src="/update-icon.svg" alt="Update" style="width: 1.5rem; height: 1.5rem;">
+                            </button>
+                        </form>
+                    </td>
+                    <td><a href="/warehouses/<%= warehouse.id %>">
+                        <img src="/delete-icon.svg" alt="Delete" style="width: 1.75rem; height: 1.75rem;">
+                    </a></td>
             <% }) %>
                 </tr>
         </tbody>

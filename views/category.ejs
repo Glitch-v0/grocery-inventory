@@ -12,23 +12,28 @@
         <%- include('partials/error', { error: error }) %>
     <% } %>
 
-    <!-- Categories Table -->
+    <h1>Add a new category or modify an existing one.</h1>
+    <!-- Category Addition Table -->
     <table>
         <thead>
             <tr>
-                <!-- Add New Category Form in Header -->
                 <form action="/categories" method="POST">
                     <th>
-                        <label for="newCategory">Add New Category:</label>
+                        <label for="newCategory">Add New Category</label>
                     </th>
-                    <td colspan="4">
+                    <td colspan="2">
                         <input type="text" name="newCategory" required>
                         <button type="submit">Add</button>
                     </td>
                 </form>
             </tr>
+        </thead>
+    </table>
+    <!-- Category Modification Table -->
+    <table>
+        <thead>
             <tr>
-                <th>Categories:</th>
+                <th>Category</th>
                 <th>Update</th>
                 <th>Delete</th>
             </tr>
@@ -38,15 +43,19 @@
                 <tr>
                     <td><%= category.category %></td>
                     <td>
-                        <form action="/categories/<%= category.id %>" method="POST">
+                        <form action="/categories/<%= category.id %>/update" method="POST">
                             <input type="text" name="updatedCategory" value="<%= category.category %>" required>
-                            <button type="submit">Update</button>
+                            <button type="submit" style="background: none; border: none; cursor: pointer;">
+                                <img src="/update-icon.svg" alt="Update" style="width: 1.5rem; height: 1.5rem;">
+                            </button>
                         </form>
                     </td>
                     <td>
-                        <form action="/categories/<%= category.id %>" method="POST">
+                        <form action="/categories/<%= category.id %>/delete" method="POST">
                             <input type="hidden" name="_method" value="DELETE">
-                            <button type="submit">Delete</button>
+                            <button type="submit" style="background: none; border: none; cursor: pointer;">
+                                <img src="/delete-icon.svg" alt="Delete" style="width: 1.75rem; height: 1.75rem;">
+                            </button>
                         </form>
                     </td>
                 </tr>
