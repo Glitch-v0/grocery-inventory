@@ -10,7 +10,7 @@ async function getGroceryList (req, res) {
 
 async function getGroceryItem (req, res) {
     const itemID = parseInt(req.params.id);
-    console.log("Received ID:", req.params.id);
+    //console.log("Received ID:", req.params.id);
     if (!itemID) {
         return res.render("error", {errorCode: 404, errorMessage: "Invalid Page"});
     }
@@ -24,7 +24,7 @@ async function getGroceryItem (req, res) {
 
 async function updateGroceryItem (req, res) {
     const itemID = parseInt(req.params.id);
-    console.log("Received ID:", req.params.id);
+    //console.log("Received ID:", req.params.id);
     if (!itemID) {
         return res.render("error", {errorCode: 404, errorMessage: "Invalid Page"});
     }

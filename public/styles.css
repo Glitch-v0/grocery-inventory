@@ -1,6 +1,8 @@
 :root {
     font-size: 10px;
     text-align: center;
+    --highlight-color: rgb(255, 255, 255);
+    --background-color: rgb(213, 255, 239);
 }
 
 h1 {
@@ -73,14 +75,28 @@ body {
     display: flex;
     flex-direction: column;
     width: 100%;
-    background-color: rgb(213, 255, 239);
+    background-color: var(--background-color);
     align-items: center;
 }
 
 #display-table {
-    background-color: rgb(255, 255, 255);
+    background-color: var(--highlight-color);
     align-content: center;
 }
+
+.category-table {
+    background-color: var(--highlight-color);
+}
+
+.category-table:nth-child(odd) {
+    background-color: var(--highlight-color);
+}
+
+.category-table:nth-child(even) {
+    background-color: var(--background-color);
+}
+
+
 
 .category-container {
     display: grid;
@@ -112,11 +128,11 @@ body {
     border: 1px solid rgb(0, 0, 0);
 }
 .display-container:nth-child(even) {
-  background-color: rgb(213, 255, 239);
+  background-color: var(--background-color);
 }
 
 .display-container:nth-child(odd) {
-    background-color: rgba(255, 255, 255);
+    background-color: var(--highlight-color);
   }
 
 .item-display {
