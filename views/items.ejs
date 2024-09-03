@@ -7,13 +7,8 @@
     <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-    <%- include('navbar', { links: [
-        { href: '/', text: 'Home' },
-        { href: '/items', text: 'Items' },
-        { href: '/categories', text: 'Categories' },
-        { href: '/warehouses', text: 'Warehouses' }
-    ] }) %>
-    <h1>Click on an item to view and edit its information.</h1>
+    <%- include('partials/navbar') %>
+    <h1>Click on an item to view<br>and edit its information.</h1>
     <table>
         <thead>
             <tr>

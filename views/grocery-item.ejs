@@ -7,69 +7,82 @@
     <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-    <%- include('navbar', { links: [
-        { href: '/', text: 'Home' },
-        { href: '/items', text: 'Items' },
-        { href: '/categories', text: 'Categories' },
-        { href: '/warehouses', text: 'Warehouses' }
-    ] }) %>
+    <%- include('partials/navbar') %>
     <!-- Edit Button to Unlock the Form -->
     <button type="button" id="editButton">Edit Item Data</button>
 
     <form action="/update-item" method="POST" id="itemForm">
-        <div class="form-container">
-            <!-- Editable Name Field -->
-            <label for="itemName">Item Name:</label>
-            <input type="text" id="itemName" name="itemName" value="<%= itemStats[0].name %>" disabled>
-        
-            <!-- Editable Category Field -->
-            <label for="category">Category:</label>
-            <input type="text" id="category" name="category" value="<%= itemStats[0].category %>" disabled>
+        <table>
+            <tbody>
+                <tr>
+                    <td><label for="itemName">Item Name:</label></td>
+                    <td><input type="text" id="itemName" name="itemName" value="<%= itemStats[0].name %>" disabled></td>
+                </tr>
+                <tr>
+                    <td><label for="category">Category:</label></td>
+                    <td>
+                        <select id="category" name="category" required disabled>
+                            <% categories.forEach(category => { %>
+                                <option value="<%= category.category %>" <%= itemStats[0].category === category.category ? 'selected' : '' %>><%= category.category %></option>
+                            <% }) %>
+                        </select>
+                    </td>
+                </tr>
+                <% itemStats.forEach((item, index) => { %>
+                    <tr>
+                        <td><label for="price-<%= index %>"><%= item.region_name %> Pricing ($):</label></td>
+                        <td><input type="text" id="price-<%= index %>" name="prices[<%= index %>]" value="<%= item.price %>" disabled></td>
+                        <input type="hidden" name="regions[<%= index %>]" value="<%= item.region_name %>">
+                        <input type="hidden" name="itemIds[<%= index %>]" value="<%= item.id %>">
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
 
-            <!-- Editable Prices for Each Region -->
-            <% itemStats.forEach((item, index) => { %>
-                <label for="price-<%= index %>"><%= item.region_name %> Pricing ($):</label>
-                <input type="text" id="price-<%= index %>" name="prices[<%= index %>]" value="<%= item.price %>" disabled>
-                <input type="hidden" name="regions[<%= index %>]" value="<%= item.region_name %>">
-                <input type="hidden" name="itemIds[<%= index %>]" value="<%= item.id %>">
-            <% }) %>
-        </div>
-
-        <!-- Submit Button -->
         <button type="submit" id="submitButton" disabled>Update Item</button>
     </form>
 
-    <!-- Back Button -->
     <a href="/items">
         <button type="button">Back</button>
     </a>
 
-    <!-- Handle Form Locking -->
     <script>
         const editButton = document.getElementById('editButton');
-        const editButtonText = 'Edit Item Data'
-        const submitButton = document.getElementById('submitButton');
-        const formElements = document.querySelectorAll('#itemForm input[type="text"]');
-        
-        editButton.addEventListener('click', function() {
-            if (editButton.textContent === editButtonText) {
-                // Enable inputs, submit button
-                formElements.forEach(element => element.disabled = false);
-                submitButton.disabled = false;
-                editButton.textContent = 'Cancel';
-            } else {
-                // Disable inputs, submit button
-                formElements.forEach(element => element.disabled = true);
-                submitButton.disabled = true;
+const submitButton = document.getElementById('submitButton');
+const formElements = document.querySelectorAll('#itemForm input[type="text"], #itemForm select');
+const rows = document.querySelectorAll('#itemForm table tbody tr');
+const categorySelect = document.getElementById('category');
 
-                // Revert button text
-                editButton.textContent = editButtonText;
+editButton.addEventListener('click', function() {
+    if (editButton.textContent === 'Edit Item Data') {
+        // Enable inputs and select, submit button
+        formElements.forEach(element => element.disabled = false);
+        submitButton.disabled = false;
+        editButton.textContent = 'Cancel';
 
-                // Reset form data
-                document.getElementById('itemForm').reset();
+        // Hide rows with <span> elements (info-only rows)
+        rows.forEach(row => {
+            const input = row.querySelector('input');
+            if (input && input.disabled) {
+                row.style.display = 'none';
             }
         });
-    </script>
+    } else {
+        // Disable inputs and select, submit button
+        formElements.forEach(element => element.disabled = true);
+        submitButton.disabled = true;
 
+        // Revert button text
+        editButton.textContent = 'Edit Item Data';
+
+        // Show all rows
+        rows.forEach(row => row.style.display = '');
+
+        // Reset form data
+        document.getElementById('itemForm').reset();
+    }
+});
+
+    </script>
 </body>
 </html>

@@ -10,21 +10,20 @@ async function getGroceryList (req, res) {
 
 async function getGroceryItem (req, res) {
     const itemID = parseInt(req.params.id);
-    //console.log("Received ID:", req.params.id);
     if (!itemID) {
         return res.render("error", {errorCode: 404, errorMessage: "Invalid Page"});
     }
     const groceryItem = await db.getItem(itemID); // returns 4 rows
+    const categoryList = await db.getCategories();
     if (groceryItem.length === 0) {
         // Handle the case where no rows are found
         res.render("error", {errorCode: 404, errorMessage: "Item not found"});
       }
-    res.render("grocery-item", {itemStats: groceryItem});
+    res.render("grocery-item", {itemStats: groceryItem, categories: categoryList});
 }
 
 async function updateGroceryItem (req, res) {
     const itemID = parseInt(req.params.id);
-    //console.log("Received ID:", req.params.id);
     if (!itemID) {
         return res.render("error", {errorCode: 404, errorMessage: "Invalid Page"});
     }
@@ -41,6 +40,18 @@ async function getCategories (req, res) {
     res.render("category", {itemCategories: categoryList});
 }
 
+async function addNewCategory(req, res) {
+    const category = req.body.newCategory;
+    
+    try {
+        await db.addNewCategory(category);
+        res.redirect("/categories");
+    } catch (err) {
+        // Send an appropriate response to the user
+        res.render("error", {errorCode: err.code, errorMessage: err.detail || err.message});
+    } 
+}
+
 async function getWarehouses (req, res) {
     const warehouseList = await db.getWarehouses();
     res.render("warehouse", {warehouses: warehouseList});
@@ -51,5 +62,6 @@ module.exports = {
     getGroceryItem,
     updateGroceryItem,
     getCategories,
+    addNewCategory,
     getWarehouses
 }

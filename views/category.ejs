@@ -7,12 +7,13 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <%- include('navbar', { links: [
-        { href: '/', text: 'Home' },
-        { href: '/items', text: 'Items' },
-        { href: '/categories', text: 'Categories' },
-        { href: '/warehouses', text: 'Warehouses' }
-    ] }) %>
+    <%- include('partials/navbar') %>
+    <form class="add-form" action="/categories/new" method="POST">
+        <label for="newCategory">Add New Category:</label>
+        <input type="text" id="newCategory" name="newCategory">
+        <button>Submit</button>
+    </form>
+    
     <table>
         <thead>
             <tr>

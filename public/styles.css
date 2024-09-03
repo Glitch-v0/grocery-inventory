@@ -1,126 +1,158 @@
 :root {
-    text-align: center;
-    --highlight-color: rgb(255, 255, 255);
-    --background-color: rgb(213, 255, 239);
+  text-align: center;
+  --highlight-color: rgb(255, 255, 255);
+  --background-color: rgb(213, 255, 239);
 }
 
 h1 {
-    font-size: 2.5rem;
+  font-size: 2.5rem;
 }
 
 h2 {
-    font-size: 2rem;
+  font-size: 2rem;
 }
 
 h3 {
-    font-size: 1.5rem;
+  font-size: 1.5rem;
 }
 
-p, label, input {
-    font-size: 1.5rem;
-    text-wrap: balance;
+p,
+label,
+input,
+select {
+  font-size: 1.5rem;
+  text-wrap: balance;
+}
+
+select {
+  width: 100%;
+  background-color: var(--highlight-color);
+  border: 1px solid black;
 }
 
 button {
-    font-size: 2rem;
+  font-size: 2rem;
 }
 
 a {
-    text-decoration: none;
-    color: black;
+  text-decoration: none;
+  color: black;
 }
 
 a:hover {
-    color: rgb(128, 0, 255);
+  color: rgb(128, 0, 255);
 }
 
 nav {
-    background-color: white;
-    width: 100%;
+  background-color: white;
+  width: 100%;
 }
+
 ul {
-    display: flex;;
-    list-style: none;
-    font-size: 2rem;
-    justify-content: space-between;
-    padding: 0 2rem;
-}
-
-
-@media screen and (max-width: 600px) {
-    h1 {
-        font-size: 3rem;
-    }
-
-    h2 {
-        font-size: 2rem;
-    }
-
-    h3 {
-        font-size: 1rem;
-    }
-    
-    p, button {
-        font-size: 1rem;
-    }
-
-    ul, label, input {
-        font-size: 1rem;
-    }
-
+  display: flex;
+  list-style: none;
+  font-size: 2rem;
+  justify-content: space-between;
+  padding: 0 2rem;
 }
 
 body {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    background-color: var(--background-color);
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background-color: var(--background-color);
+  align-items: center;
 }
 
 #display-table {
-    background-color: var(--highlight-color);
-    align-content: center;
+  background-color: var(--highlight-color);
+  align-content: center;
 }
 
 table {
-    margin: 1rem;
-    font-size: 2.5rem;
-    border-spacing: 0;
-    border-collapse: collapse;
+  margin: 1rem;
+  font-size: 2.5rem;
+  border-spacing: 0;
+  border-collapse: collapse;
 }
 
 thead tr {
-    background-color: var(--highlight-color);
+  background-color: var(--highlight-color);
 }
 
 tbody tr:nth-child(odd) {
-    background-color: var(--background-color);
+  background-color: var(--background-color);
 }
 
 tbody tr:nth-child(even) {
-    background-color: var(--highlight-color);
+  background-color: var(--highlight-color);
 }
 
-td, th {
-    border: 1px solid black;
-    padding: 1rem;
+td,
+th {
+  border: 1px solid black;
+  padding: 1rem;
 }
-
 
 .form-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-    place-items: center;
-    padding: 2rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  place-items: center;
+  padding: 2rem;
 }
 
-#editButton, #submitButton {
-    margin: 1rem;
-    padding: 0.5rem;
+#editButton,
+#submitButton {
+  margin: 1rem;
+  padding: 0.5rem;
 }
 
 .item-display {
-    text-align: start;
+  text-align: start;
+}
+
+.add-form {
+  display: grid;
+  gap: 1rem;
+  margin: 1rem;
+  padding: 1rem;
+}
+
+.add-form > label {
+  font-size: 2rem;
+}
+
+@media screen and (max-width: 600px) {
+  h1 {
+    font-size: 2rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  h3 {
+    font-size: 1rem;
+  }
+
+  p,
+  button {
+    font-size: 1rem;
+  }
+
+  ul,
+  label,
+  input,
+  select {
+    font-size: 1rem;
+  }
+
+  ul {
+    padding: 0 0.75rem;
+  }
+
+  table {
+    font-size: 1.5rem;
+  }
 }

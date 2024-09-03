@@ -1,18 +1,19 @@
-const express = require("express");
+const express = require('express');
 
 const router = express.Router();
-const groceryController = require("../controllers/grocery-controller");
+const groceryController = require('../controllers/grocery-controller');
 
-router.get("/", (req, res) => {
-    res.render("index");
+router.get('/', (req, res) => {
+  res.render('index');
 });
-router.get("/items", groceryController.getGroceryList);
-router.get("/items/:id", groceryController.getGroceryItem);
+router.get('/items', groceryController.getGroceryList);
+router.get('/items/:id', groceryController.getGroceryItem);
 // router.post("/:id", groceryController.updateGroceryItem);
-router.get("/categories", groceryController.getCategories);
-router.get("/warehouses", groceryController.getWarehouses)
-router.get("/*", (req, res) => {
-    res.render("error", {errorCode: 404, errorMessage: "Invalid Page"});
+router.get('/categories', groceryController.getCategories);
+router.post('/categories/new', groceryController.addNewCategory);
+router.get('/warehouses', groceryController.getWarehouses);
+router.get('/*', (req, res) => {
+  res.render('error', { errorCode: 404, errorMessage: 'Invalid Page' });
 });
 // router.post("/", groceryController.addGroceryItem);
 
