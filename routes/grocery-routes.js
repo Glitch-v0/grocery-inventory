@@ -10,7 +10,7 @@ router.get('/items', groceryController.getGroceryList);
 router.get('/items/:id', groceryController.getGroceryItem);
 // router.post("/:id", groceryController.updateGroceryItem);
 router.get('/categories', groceryController.getCategories);
-router.post('/categories/new', groceryController.addNewCategory);
+router.post('/categories', groceryController.addNewCategory);
 router.get('/warehouses', groceryController.getWarehouses);
 router.get('/*', (req, res) => {
   res.render('error', { errorCode: 404, errorMessage: 'Invalid Page' });

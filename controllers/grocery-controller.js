@@ -37,7 +37,7 @@ async function updateGroceryItem (req, res) {
 
 async function getCategories (req, res) {
     const categoryList = await db.getCategories();
-    res.render("category", {itemCategories: categoryList});
+    res.render("category", {itemCategories: categoryList, error: null});
 }
 
 async function addNewCategory(req, res) {
@@ -47,8 +47,8 @@ async function addNewCategory(req, res) {
         await db.addNewCategory(category);
         res.redirect("/categories");
     } catch (err) {
-        // Send an appropriate response to the user
-        res.render("error", {errorCode: err.code, errorMessage: err.detail || err.message});
+        const categoryList = await db.getCategories();
+        res.render("category", {itemCategories: categoryList, error: err});
     } 
 }
 

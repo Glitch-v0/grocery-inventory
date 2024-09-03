@@ -8,7 +8,10 @@
 </head>
 <body>
     <%- include('partials/navbar') %>
-    <form class="add-form" action="/categories/new" method="POST">
+    <% if (error) { %> 
+        <%- include('partials/error', { error: error }) %>
+    <% } %>
+    <form class="add-form" action="/categories" method="POST">
         <label for="newCategory">Add New Category:</label>
         <input type="text" id="newCategory" name="newCategory">
         <button>Submit</button>
