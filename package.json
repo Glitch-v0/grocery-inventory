@@ -7,5 +7,8 @@
   },
   "devDependencies": {
     "prettier": "3.3.3"
+  },
+  "scripts": {
+    "reset": "node db/dropTables.js && node db/createTables.js && node --trace-warnings --watch app"
   }
 }

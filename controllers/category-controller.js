@@ -27,19 +27,30 @@ async function updateCategory(req, res) {
     newName = stringsMethods.toTitleCase(newName)
     const categoryID = parseInt(req.params.id);
     try {
-        console.log(newName)
-        await db.updateCategory(newName, categoryID);
+        const result = await db.updateCategory(newName, categoryID);
         res.redirect("/categories");
     } catch {
         const categoryList = await db.getCategories();
         res.render("category", {itemCategories: categoryList, error: err});
     }
-    console.log(categoryID)
 }
 
+async function deleteCategory(req, res) {
+    const categoryID = parseInt(req.params.id);
+    console.log(categoryID)
+    try {
+        console.log('Deleting...')
+        await db.deleteCategory(categoryID);
+        res.redirect("/categories");
+    } catch (err) {
+        const categoryList = await db.getCategories();
+        res.render("category", {itemCategories: categoryList, error: err});
+    }
+}
 
 module.exports ={
     getCategories,
     addNewCategory,
-    updateCategory
+    updateCategory,
+    deleteCategory
 }

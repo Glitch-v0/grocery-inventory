@@ -8,6 +8,20 @@ async function getWarehouses (req, res) {
     res.render("warehouse", {warehouses: warehouseList, error: null});
 }
 
+async function addNewWarehouse(req, res) {
+    let newWarehouse = req.body.newWarehouse;
+    newWarehouse = stringsMethods.removeNonAlphanumericAndAmpersand(newWarehouse)
+    newWarehouse = stringsMethods.toTitleCase(newWarehouse)
+    console.log(newWarehouse)
+    try {
+        await db.addNewWarehouse(newWarehouse);
+        res.redirect("/warehouses");
+    } catch (err) {
+        const warehouseList = await db.getWarehouses();
+        res.render("warehouse", {warehouses: warehouseList, error: err});
+    } 
+}
+
 async function updateWarehouse(req, res) {
     let newName = req.body.newName;
     console.log(newName)
@@ -24,7 +38,20 @@ async function updateWarehouse(req, res) {
     console.log(categoryID)
 }
 
+async function deleteWarehouse(req, res){
+    const warehouseID = parseInt(req.params.id);
+    try {
+        await db.deleteWarehouse(warehouseID);
+        res.redirect("/warehouses");
+    } catch (err) {
+        const warehouseList = await db.getWarehouses();
+        res.render("warehouse", {warehouses: warehouseList, error: err});
+    }
+}
+
 module.exports = {
     getWarehouses,
-    updateWarehouse
+    addNewWarehouse,
+    updateWarehouse,
+    deleteWarehouse
 }

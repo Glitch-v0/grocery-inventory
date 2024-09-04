@@ -11,13 +11,13 @@
     <% if (error) { %> 
         <%- include('partials/error', { error: error }) %>
     <% } %>
-    
+
     <h1>Add a new category or modify an existing one.</h1>
     <!-- Warehouse Addition Table -->
     <table>
         <thead>
             <tr>
-                <form action="/warehouse" method="POST">
+                <form action="/warehouses" method="POST">
                     <th>
                         <label for="newWarehouse">Add New Warehouse</label>
                     </th>
@@ -52,9 +52,11 @@
                         </form>
                     </td>
                     <td class="delete-container">
-                        <a href="/warehouses/<%= warehouse.id %>">
-                        <img src="/delete-icon.svg" alt="Delete" style="width: 1.75rem; height: 1.75rem;">
-                        </a>
+                        <form action="/warehouses/<%= warehouse.id %>/delete" method="POST">
+                            <button type="submit" style="background: none; border: none; cursor: pointer;">
+                                <img src="/delete-icon.svg" alt="Delete" style="width: 1.75rem; height: 1.75rem;">
+                            </button>
+                        </form>
                     </td>
             <% }) %>
                 </tr>
