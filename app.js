@@ -1,7 +1,9 @@
 const express = require('express');
 const path = require('node:path');
 const app = express();
-const routes = require('./routes/grocery-routes');
+const itemsRouter = require('./routes/item-router');
+const categoriesRouter = require('./routes/category-router');
+const warehousesRouter = require('./routes/warehouse-router');
 
 // set up view engine
 app.set('views', path.join(__dirname, 'views'));
@@ -15,7 +17,15 @@ const assetsPath = path.join(__dirname, 'public');
 app.use(express.static(assetsPath));
 
 // set up routes
-app.use('/', routes);
+app.get('/', (req, res) => {
+  res.redirect('/items');
+});
+app.use('/items', itemsRouter);
+app.use('/categories', categoriesRouter);
+app.use('/warehouses', warehousesRouter);
+app.get('/*', (req, res) => {
+  res.render('error', { errorCode: 404, errorMessage: 'Invalid Page' });
+});
 
 const port = process.env.PORT || 3000;
 
