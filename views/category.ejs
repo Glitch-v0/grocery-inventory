@@ -43,7 +43,7 @@
                 <tr>
                     <td><%= category.category %></td>
                     <td>
-                        <form action="/categories/<%= category.id %>/update" method="POST">
+                        <form action="/categories/update/<%= category.id %>" method="POST">
                             <input type="text" name="updatedCategory" value="<%= category.category %>" required>
                             <button type="submit" style="background: none; border: none; cursor: pointer;">
                                 <img src="/update-icon.svg" alt="Update" style="width: 1.5rem; height: 1.5rem;">
@@ -51,7 +51,7 @@
                         </form>
                     </td>
                     <td>
-                        <form action="/categories/<%= category.id %>/delete" method="POST">
+                        <form action="/categories/<%= category.id %>/" method="DELETE">
                             <input type="hidden" name="_method" value="DELETE">
                             <button type="submit" style="background: none; border: none; cursor: pointer;">
                                 <img src="/delete-icon.svg" alt="Delete" style="width: 1.75rem; height: 1.75rem;">
