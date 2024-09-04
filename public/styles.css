@@ -112,7 +112,6 @@ img {
   margin: 1rem;
 }
 
-
 .form-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -141,9 +140,10 @@ img {
 .update-form {
   display: grid;
   grid-template-columns: 4fr 1fr;
+  border: none;
 }
 
-.delete-container {
+.delete-container > a {
   display: grid;
   place-items: center;
 }
