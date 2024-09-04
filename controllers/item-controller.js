@@ -5,7 +5,7 @@ const categoryDB = require("../db/category-queries");
 
 async function getGroceryList (req, res) {
     const groceryList = await itemDB.getList();
-    res.render("items", {groceryItems: groceryList});
+    res.render("items", {groceryItems: groceryList, error: null});
 }
 
 async function getGroceryItem (req, res) {
@@ -32,7 +32,7 @@ async function updateGroceryItem (req, res) {
         // Handle the case where no rows are found
         res.render("error", {errorCode: 404, errorMessage: "Item not found"});
       }
-    res.render("grocery-item", {itemStats: groceryItem});
+    res.render("grocery-item", {itemStats: groceryItem, error: null});
 }
 
 module.exports ={

@@ -8,6 +8,10 @@
 </head>
 <body>
     <%- include('partials/navbar') %>
+    <% if (error) { %> 
+        <%- include('partials/error', { error: error }) %>
+    <% } %>
+    
     <h1>Click on an item to view<br>and edit its information.</h1>
     
     <!-- Item Addition Table -->
