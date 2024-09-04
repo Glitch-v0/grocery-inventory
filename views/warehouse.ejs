@@ -13,12 +13,12 @@
     <table>
         <thead>
             <tr>
-                <form action="/categories" method="POST">
+                <form action="/warehouse" method="POST">
                     <th>
-                        <label for="newCategory">Add New Warehouse</label>
+                        <label for="newWarehouse">Add New Warehouse</label>
                     </th>
                     <td colspan="2">
-                        <input type="text" name="newCategory" required>
+                        <input type="text" name="newWarehouse" id="newWarehouse" required>
                         <button type="submit">Add</button>
                     </td>
                 </form>
@@ -40,14 +40,14 @@
                 <tr>
                     <td><%= warehouse.region_name %></td>
                     <td>
-                        <form action="/warehouses/<%= warehouse.id %>" method="POST">
+                        <form action="/warehouses/<%= warehouse.id %>" method="POST" class="update-form">
                             <input type="text" name="newName" value="<%= warehouse.region_name %>" required>
                             <button type="submit" style="background: none; border: none; cursor: pointer;">
                                 <img src="/update-icon.svg" alt="Update" style="width: 1.5rem; height: 1.5rem;">
                             </button>
                         </form>
                     </td>
-                    <td><a href="/warehouses/<%= warehouse.id %>">
+                    <td class="delete-container"><a href="/warehouses/<%= warehouse.id %>">
                         <img src="/delete-icon.svg" alt="Delete" style="width: 1.75rem; height: 1.75rem;">
                     </a></td>
             <% }) %>
