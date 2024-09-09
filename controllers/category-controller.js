@@ -9,11 +9,11 @@ async function getCategories (req, res) {
     res.render("category", {itemCategories: categoryList, error: null});
 }
 
-async function addNewCategory(req, res) {
+async function addCategory(req, res) {
     const category = req.body.newCategory;
     
     try {
-        await db.addNewCategory(category);
+        await db.addCategory(category);
         res.redirect("/categories");
     } catch (err) {
         const categoryList = await db.getCategories();
@@ -50,7 +50,7 @@ async function deleteCategory(req, res) {
 
 module.exports ={
     getCategories,
-    addNewCategory,
+    addCategory,
     updateCategory,
     deleteCategory
 }
