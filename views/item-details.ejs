@@ -20,13 +20,15 @@
                     <td><label for="itemName">Item Name:</label></td>
                     <td><input type="text" id="itemName" name="itemName" value="<%= itemStats[0].name %>" disabled></td>
                 </tr>
-                <% itemCategories.forEach((category) => { %>
+                <% itemCategories.forEach((linkedCategory) => { %>
                     <tr>
-                        <td><label for="category>">Category:</label></td>
+                        <td><label for="category_<%= linkedCategory.id %>">Category:</label></td>
                         <td>
-                            <select id="category_<%= category.id %>" name="category_<%= category.id %>" required>
+                            <select id="category_<%= linkedCategory.id %>" name="category_<%= linkedCategory.id %>" required>
                                 <% categories.forEach(category => { %>
-                                    <option disabled value="<%= category.name %>" <%= category.name === itemStats[0].category ? 'selected' : '' %>><%= category.name %></option>
+                                    <option value="<%= category.name %>" <%= category.name === linkedCategory.name ? 'selected' : '' %>>
+                                        <%= category.name %>
+                                    </option>
                                 <% }) %>
                             </select>
                         </td>
@@ -45,9 +47,9 @@
                 </tr>
                 <% regions.forEach((item, index) => { %>
                     <tr>
-                        <td><label for="price-<%= index %>"><%= item.region_name %> Pricing ($):</label></td>
-                        <td><input type="text" id="price-<%= index %>" name="prices[<%= index %>]" value="<%= item.price ? item.price : 0 %>" disabled></td>
-                        <input type="hidden" name="regions[<%= index %>]" value="<%= item.region_name %>">
+                        <td><label for="price-<%= index %>"><%= item.name %> Pricing ($):</label></td>
+                        <td><input type="text" id="price-<%= index %>" name="prices[<%= index %>]" value="<%= itemStats[index].price ? itemStats[index].price : 0 %>" disabled></td>
+                        <input type="hidden" name="regions[<%= index %>]" value="<%= item.name %>">
                         <input type="hidden" name="itemIds[<%= index %>]" value="<%= item.id %>">
                     </tr>
                 <% }) %>

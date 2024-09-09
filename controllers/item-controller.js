@@ -24,10 +24,13 @@ async function getItemDetails(req, res) {
       errorMessage: "Invalid Page",
     });
   }
-  const itemDetails = await itemDB.getItemDetails(itemID); // returns 4 rows
-  const itemCategories = await categoryDB.getCategoriesByItemID(itemID);
-  const categoryList = await categoryDB.getCategories();
-  const regionList = await regionDB.getRegions();
+  const itemDetails = await itemDB.getItemDetails(itemID); // returns all details of item for each region
+  console.log({ itemDetails });
+  const itemCategories = await categoryDB.getCategoriesByItemID(itemID); // to determine how many categories to display
+  // console.log({ itemCategories });
+  const categoryList = await categoryDB.getCategories(); // to show different options to select
+  const regionList = await regionDB.getRegions(); // to show all region options for pricing
+  // console.log({ regionList });
   if (itemDetails.length === 0) {
     // Handle the case where no rows are found
     res.render("error", { errorCode: 404, errorMessage: "Item not found" });

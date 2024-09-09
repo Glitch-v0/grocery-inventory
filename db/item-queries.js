@@ -23,19 +23,13 @@ async function getItemByID(itemID) {
 async function getItemDetails(itemID) {
   const query = `
     SELECT 
-        items.id,
+        items.id as item_id,
         items.name,
-        categories.id,
-        categories.name as category,
-        regions.id,
+        regions.id as region_id,
         regions.name as region_name,
         regional_prices.price
     FROM 
         items
-    LEFT JOIN 
-        item_categories ON items.id = item_categories.item_id
-    LEFT JOIN 
-        categories ON item_categories.category_id = categories.id
     LEFT JOIN 
         regional_prices ON items.id = regional_prices.item_id
     LEFT JOIN 
