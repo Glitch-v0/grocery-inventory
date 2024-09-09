@@ -7,8 +7,9 @@ const regionDB = require("../db/region-queries");
 async function addItem(req, res) {
   const itemName = req.body.newItem;
   const addedItem = await itemDB.addItem(itemName);
+  console.log(addedItem[0].id);
   const currentItemList = await itemDB.getAllItems();
-  res.render("items", { itemList: currentItemList, error: null });
+  res.redirect(`items/${addedItem[0].id}`);
 }
 
 async function getItems(req, res) {
@@ -25,7 +26,7 @@ async function getItemDetails(req, res) {
     });
   }
   const itemDetails = await itemDB.getItemDetails(itemID); // returns all details of item for each region
-  console.log({ itemDetails });
+  // console.log({ itemDetails });
   const itemCategories = await categoryDB.getCategoriesByItemID(itemID); // to determine how many categories to display
   // console.log({ itemCategories });
   const categoryList = await categoryDB.getCategories(); // to show different options to select

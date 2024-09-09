@@ -45,14 +45,21 @@
                         </select>
                     </td>
                 </tr>
-                <% regions.forEach((item, index) => { %>
+                <% regions.forEach((region, index) => { 
+                    const itemDetail = itemStats.find(item => item.region_id === region.id);
+                    const price = itemDetail ? itemDetail.price : '0.00';
+                %>
                     <tr>
-                        <td><label for="price-<%= index %>"><%= item.name %> Pricing ($):</label></td>
-                        <td><input type="text" id="price-<%= index %>" name="prices[<%= index %>]" value="<%= itemStats[index].price ? itemStats[index].price : 0 %>" disabled></td>
-                        <input type="hidden" name="regions[<%= index %>]" value="<%= item.name %>">
-                        <input type="hidden" name="itemIds[<%= index %>]" value="<%= item.id %>">
+                        <td><label for="price-<%= index %>"><%= region.name %> Pricing ($):</label></td>
+                        <td>
+                            <input type="text" id="price-<%= index %>" name="prices[<%= index %>]" 
+                                   value="<%= price %>" disabled>
+                        </td>
+                        <input type="hidden" name="regions[<%= index %>]" value="<%= region.name %>">
+                        <input type="hidden" name="regionIds[<%= index %>]" value="<%= region.id %>">
                     </tr>
-                <% }) %>
+                <% }); %>
+                
             </tbody>
         </table>
 
