@@ -12,8 +12,6 @@
         <%- include('partials/error', { error: error }) %>
     <% } %>
     
-    <h1>Click on an item to view<br>and edit its information.</h1>
-    
     <!-- Item Addition Table -->
     <table>
         <thead>
@@ -31,18 +29,33 @@
         </thead>
     </table>
 
-    <!-- Item/Category Table -->
+    <!-- Item List Table -->
     <table>
         <thead>
             <tr>
                 <th>Item</th>
+                <th>Update</th>
+                <th>Delete</th>
             </tr>
         </thead>
         <tbody>
-            <% groceryItems.forEach(item => { %>
+            <% itemList.forEach(item => { %>
                 <tr>
+                    <td><%= item.name %></td>
                     <td>
-                        <a href="items/<%= item.id %> "><%= item.name %></a>
+                        <form action="/items/<%= item.id %>/" method="GET">
+                            <button type="submit" style="background: none; border: none; cursor: pointer;">
+                                <img src="/update-icon.svg" alt="Update" style="width: 1.5rem; height: 1.5rem;">
+                            </button>
+                        </form>
+                    </td>
+                    <td>  
+                        <form action="/items/<%= item.id %>/delete" method="POST">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <button type="submit" style="background: none; border: none; cursor: pointer;">
+                                <img src="/delete-icon.svg" alt="Delete" style="width: 1.75rem; height: 1.75rem;">
+                            </button>
+                        </form>
                     </td>
                 </tr>
             <% }) %>

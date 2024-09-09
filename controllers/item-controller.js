@@ -3,9 +3,16 @@ const router = express.Router();
 const itemDB = require("../db/item-queries");
 const categoryDB = require("../db/category-queries.js");
 
+async function addItem (req, res) {
+    const itemName = req.body.newItem;
+    const addedItem = await itemDB.addItem(itemName);
+    const currentItemList = await itemDB.getAllItems();
+    res.render("items", {itemList: currentItemList, error: null});
+}
+
 async function getItems (req, res) {
-    const groceryList = await itemDB.getList();
-    res.render("items", {groceryItems: groceryList, error: null});
+    const groceryList = await itemDB.getAllItems();
+    res.render("items", {itemList: groceryList, error: null});
 }
 
 async function getItemDetails (req, res) {
@@ -22,24 +29,33 @@ async function getItemDetails (req, res) {
         // Handle the case where no rows are found
         res.render("error", {errorCode: 404, errorMessage: "Item not found"});
       }
-    res.render("item-details", {itemStats: itemDetails, categories: categoryList, itemCategories: itemCategories, error: null});
+    res.render("item-details", {id: itemID, itemStats: itemDetails, categories: categoryList, itemCategories: itemCategories, error: null});
 }
 
 async function updateItem (req, res) {
     const itemID = parseInt(req.params.id);
+    console.log({itemID})
     if (!itemID) {
         return res.render("error", {errorCode: 404, errorMessage: "Invalid Page"});
     }
-    const groceryItem = await itemDB.getItemByID(itemID); // returns 4 rows
-    if (groceryItem.length === 0) {
-        // Handle the case where no rows are found
-        res.render("error", {errorCode: 404, errorMessage: "Item not found"});
-      }
-    res.render("item-details", {itemStats: groceryItem, error: null});
+    console.log('Gunna update that item now!')
+    res.redirect("/items")
+}
+
+async function deleteItem (req, res) {
+    const itemID = parseInt(req.params.id);
+    if (!itemID) {
+        return res.render("error", {errorCode: 404, errorMessage: "Invalid Page"});
+    }
+    const deletedItem = await itemDB.deleteItem(itemID);
+    const currentItemList = await itemDB.getAllItems();
+    res.render("items", {itemList: currentItemList, error: null});
 }
 
 module.exports ={
+    addItem,
     getItems,
     getItemDetails,
-    updateItem
+    updateItem,
+    deleteItem
 }
