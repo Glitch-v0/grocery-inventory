@@ -16,9 +16,9 @@ async function getItemDetails(itemID){
         items.id,
         items.name,
         categories.id,
-        categories.name,
+        categories.name as category,
         regions.id,
-        regions.name,
+        regions.name as region_name,
         regional_prices.price
     FROM 
         items
