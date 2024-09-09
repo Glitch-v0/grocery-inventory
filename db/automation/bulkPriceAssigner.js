@@ -1,14 +1,14 @@
 const { Client } = require("pg");
-const readline = require('readline');
+const readline = require("readline");
 require("dotenv").config();
 
 const rl = readline.createInterface({
   input: process.stdin,
-  output: process.stdout
+  output: process.stdout,
 });
 
 async function getItems(client) {
-  const res = await client.query('SELECT id, name FROM items ORDER BY id');
+  const res = await client.query("SELECT id, name FROM items ORDER BY id");
   return res.rows;
 }
 
@@ -20,7 +20,13 @@ async function insertRegionalPrices(client, itemId, prices) {
     ($1, 3, $4),  -- Northeastern (22% increase)
     ($1, 4, $5);  -- Northwestern (18% increase)
   `;
-  await client.query(query, [itemId, prices.SE, prices.SW, prices.NE, prices.NW]);
+  await client.query(query, [
+    itemId,
+    prices.SE,
+    prices.SW,
+    prices.NE,
+    prices.NW,
+  ]);
 }
 
 async function main() {
@@ -35,33 +41,38 @@ async function main() {
 
     for (const item of items) {
       await new Promise((resolve) => {
-        rl.question(`Enter price for Southeastern region for "${item.name}": `, async (sePrice) => {
-          const sePriceNum = parseFloat(sePrice);
+        rl.question(
+          `Enter price for Southeastern region for "${item.name}": `,
+          async (sePrice) => {
+            const sePriceNum = parseFloat(sePrice);
 
-          const prices = {
-            SE: sePriceNum,
-            SW: (sePriceNum * 1.20).toFixed(2),
-            NE: (sePriceNum * 1.22).toFixed(2),
-            NW: (sePriceNum * 1.18).toFixed(2),
-          };
+            const prices = {
+              SE: sePriceNum,
+              SW: (sePriceNum * 1.2).toFixed(2),
+              NE: (sePriceNum * 1.22).toFixed(2),
+              NW: (sePriceNum * 1.18).toFixed(2),
+            };
 
-          await insertRegionalPrices(client, item.id, prices);
-          console.log(`Assigned prices for "${item.name}" - SE: ${prices.SE}, SW: ${prices.SW}, NE: ${prices.NE}, NW: ${prices.NW}`);
-          resolve();
-        });
+            await insertRegionalPrices(client, item.id, prices);
+            console.log(
+              `Assigned prices for "${item.name}" - SE: ${prices.SE}, SW: ${prices.SW}, NE: ${prices.NE}, NW: ${prices.NW}`,
+            );
+            resolve();
+          },
+        );
       });
     }
 
-    console.log('All items have been assigned regional prices.');
+    console.log("All items have been assigned regional prices.");
   } catch (err) {
-    console.error('Error running script:', err);
+    console.error("Error running script:", err);
   } finally {
     await client.end();
     rl.close();
   }
 }
 
-main().catch(err => {
-  console.error('Unexpected error:', err);
+main().catch((err) => {
+  console.error("Unexpected error:", err);
   process.exit(1);
 });

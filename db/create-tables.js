@@ -1,7 +1,5 @@
-
 const { Client } = require("pg");
 require("dotenv").config();
-
 
 const createTables = `
 CREATE TABLE items (
@@ -31,7 +29,7 @@ CREATE TABLE regional_prices (
     price DECIMAL(10, 2) NOT NULL,
     PRIMARY KEY (item_id, region_id)
 );
-`
+`;
 const insertIntoCategories = `
 INSERT INTO categories (name) VALUES
 ('Fresh vegetables'),
@@ -50,7 +48,7 @@ INSERT INTO categories (name) VALUES
 ('Baked goods'),
 ('Baking'),
 ('Snacks');
-`
+`;
 
 const insertIntoItems = `
 INSERT INTO items (name) VALUES
@@ -273,7 +271,7 @@ INSERT INTO items (name) VALUES
 ('Pudding'),
 ('Pretzels'),
 ('Tortilla Chips');
-`
+`;
 
 const insertIntoItemCategories = `
 INSERT INTO item_categories (item_id, category_id) VALUES
@@ -464,7 +462,7 @@ INSERT INTO item_categories (item_id, category_id) VALUES
 (185, 16),
 (186, 16),
 (187, 16);
-`
+`;
 
 const insertIntoRegions = `
 INSERT INTO regions (name) VALUES
@@ -472,7 +470,7 @@ INSERT INTO regions (name) VALUES
 ('Southwestern US'),
 ('Northeastern US'),
 ('Northwestern US');
-`
+`;
 
 const insertRegionalPrices = `
 INSERT INTO regional_prices (item_id, region_id, price) VALUES
@@ -1224,37 +1222,34 @@ INSERT INTO regional_prices (item_id, region_id, price) VALUES
 (187, 2, 6.00),
 (187, 3, 6.10),
 (187, 4, 5.90);
-`
+`;
 
 async function main() {
-    console.log("seeding...");
-    const client = new Client({
-      connectionString: process.env.CONNECTION_STRING,
-    });
-
-    try {
-        await client.connect();
-        await client.query("BEGIN")
-        await client.query(createTables);
-        await client.query(insertIntoCategories);
-        await client.query(insertIntoItems);
-        await client.query(insertIntoItemCategories);
-        await client.query(insertIntoRegions);
-        await client.query(insertRegionalPrices);
-        await client.query("COMMIT");
-        console.log("Database seeding completed successfully.");
-    } catch (error) {
-        console.error("Error seeding database:", error);
-        await client.query("ROLLBACK");
-    } finally {
-        await client.end();
-    }
-  }
-  
- 
-main().catch(error => {
-    console.error("Unexpected error:", error);
-    process.exit(1);
+  console.log("seeding...");
+  const client = new Client({
+    connectionString: process.env.CONNECTION_STRING,
   });
-  
-  
+
+  try {
+    await client.connect();
+    await client.query("BEGIN");
+    await client.query(createTables);
+    await client.query(insertIntoCategories);
+    await client.query(insertIntoItems);
+    await client.query(insertIntoItemCategories);
+    await client.query(insertIntoRegions);
+    await client.query(insertRegionalPrices);
+    await client.query("COMMIT");
+    console.log("Database seeding completed successfully.");
+  } catch (error) {
+    console.error("Error seeding database:", error);
+    await client.query("ROLLBACK");
+  } finally {
+    await client.end();
+  }
+}
+
+main().catch((error) => {
+  console.error("Unexpected error:", error);
+  process.exit(1);
+});

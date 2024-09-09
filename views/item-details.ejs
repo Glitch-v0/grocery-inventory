@@ -22,9 +22,9 @@
                 </tr>
                 <% itemCategories.forEach((category) => { %>
                     <tr>
-                        <td><label for="category_<%= category.index %>">Category:</label></td>
+                        <td><label for="category>">Category:</label></td>
                         <td>
-                            <select id="category_<%= category.index %>" name="category_<%= category.index %>" required>
+                            <select id="category_<%= category.id %>" name="category_<%= category.id %>" required>
                                 <% categories.forEach(category => { %>
                                     <option disabled value="<%= category.name %>" <%= category.name === itemStats[0].category ? 'selected' : '' %>><%= category.name %></option>
                                 <% }) %>
@@ -32,10 +32,21 @@
                         </td>
                     </tr>
                 <% }) %>
-                <% itemStats.forEach((item, index) => { %>
+                <tr>
+                    <td><label for="newCategory">Add Category:</label></td>
+                    <td>
+                        <select id="newCategory" name="newCategory">
+                            <option value="" disabled selected>Select a category</option>
+                            <% categories.forEach(category => { %>
+                                <option disabled value="<%= category.name %>"><%= category.name %></option>
+                            <% }) %>
+                        </select>
+                    </td>
+                </tr>
+                <% regions.forEach((item, index) => { %>
                     <tr>
                         <td><label for="price-<%= index %>"><%= item.region_name %> Pricing ($):</label></td>
-                        <td><input type="text" id="price-<%= index %>" name="prices[<%= index %>]" value="<%= item.price %>" disabled></td>
+                        <td><input type="text" id="price-<%= index %>" name="prices[<%= index %>]" value="<%= item.price ? item.price : 0 %>" disabled></td>
                         <input type="hidden" name="regions[<%= index %>]" value="<%= item.region_name %>">
                         <input type="hidden" name="itemIds[<%= index %>]" value="<%= item.id %>">
                     </tr>
@@ -52,40 +63,40 @@
 
     <script>
         const editButton = document.getElementById('editButton');
-const submitButton = document.getElementById('submitButton');
-const formElements = document.querySelectorAll('#itemForm input[type="text"], #itemForm select');
-const rows = document.querySelectorAll('#itemForm table tbody tr');
-const categorySelect = document.getElementById('category');
+        const submitButton = document.getElementById('submitButton');
+        const formElements = document.querySelectorAll('#itemForm input[type="text"], #itemForm select, #itemForm option');
+        const rows = document.querySelectorAll('#itemForm table tbody tr');
+        const categorySelect = document.getElementById('category');
 
-editButton.addEventListener('click', function() {
-    if (editButton.textContent === 'Edit Item Data') {
-        // Enable inputs and select, submit button
-        formElements.forEach(element => element.disabled = false);
-        submitButton.disabled = false;
-        editButton.textContent = 'Cancel';
+        editButton.addEventListener('click', function() {
+            if (editButton.textContent === 'Edit Item Data') {
+                // Enable inputs and select, submit button
+                formElements.forEach(element => element.disabled = false);
+                submitButton.disabled = false;
+                editButton.textContent = 'Cancel';
 
-        // Hide rows with <span> elements (info-only rows)
-        rows.forEach(row => {
-            const input = row.querySelector('input');
-            if (input && input.disabled) {
-                row.style.display = 'none';
+                // Hide rows with <span> elements (info-only rows)
+                rows.forEach(row => {
+                    const input = row.querySelector('input');
+                    if (input && input.disabled) {
+                        row.style.display = 'none';
+                    }
+                });
+            } else {
+                // Disable inputs and select, submit button
+                formElements.forEach(element => element.disabled = true);
+                submitButton.disabled = true;
+
+                // Revert button text
+                editButton.textContent = 'Edit Item Data';
+
+                // Show all rows
+                rows.forEach(row => row.style.display = '');
+
+                // Reset form data
+                document.getElementById('itemForm').reset();
             }
         });
-    } else {
-        // Disable inputs and select, submit button
-        formElements.forEach(element => element.disabled = true);
-        submitButton.disabled = true;
-
-        // Revert button text
-        editButton.textContent = 'Edit Item Data';
-
-        // Show all rows
-        rows.forEach(row => row.style.display = '');
-
-        // Reset form data
-        document.getElementById('itemForm').reset();
-    }
-});
 
     </script>
 </body>

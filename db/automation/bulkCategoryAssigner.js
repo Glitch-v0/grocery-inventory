@@ -1,19 +1,22 @@
-const readline = require('readline');
-const { Client } = require('pg');
-require('dotenv').config();
+const readline = require("readline");
+const { Client } = require("pg");
+require("dotenv").config();
 
 async function getItems(client) {
-  const res = await client.query('SELECT id, name FROM items ORDER BY id');
+  const res = await client.query("SELECT id, name FROM items ORDER BY id");
   return res.rows;
 }
 
 async function getCategories(client) {
-  const res = await client.query('SELECT id, name FROM categories ORDER BY id');
+  const res = await client.query("SELECT id, name FROM categories ORDER BY id");
   return res.rows;
 }
 
 async function insertItemCategory(client, itemId, categoryId) {
-  await client.query('INSERT INTO item_categories (item_id, category_id) VALUES ($1, $2)', [itemId, categoryId]);
+  await client.query(
+    "INSERT INTO item_categories (item_id, category_id) VALUES ($1, $2)",
+    [itemId, categoryId],
+  );
 }
 
 async function promptUser(question) {
@@ -50,24 +53,29 @@ async function main() {
       const answer = await promptUser(`Enter the number of the category: `);
       const selectedCategoryIndex = parseInt(answer) - 1;
 
-      if (selectedCategoryIndex >= 0 && selectedCategoryIndex < categories.length) {
+      if (
+        selectedCategoryIndex >= 0 &&
+        selectedCategoryIndex < categories.length
+      ) {
         const selectedCategoryId = categories[selectedCategoryIndex].id;
         await insertItemCategory(client, item.id, selectedCategoryId);
-        console.log(`Assigned "${item.name}" to category "${categories[selectedCategoryIndex].name}"`);
+        console.log(
+          `Assigned "${item.name}" to category "${categories[selectedCategoryIndex].name}"`,
+        );
       } else {
         console.log(`Invalid selection for item "${item.name}".`);
       }
     }
 
-    console.log('All items have been assigned categories.');
+    console.log("All items have been assigned categories.");
   } catch (err) {
-    console.error('Error running script:', err);
+    console.error("Error running script:", err);
   } finally {
     await client.end();
   }
 }
 
-main().catch(err => {
-  console.error('Unexpected error:', err);
+main().catch((err) => {
+  console.error("Unexpected error:", err);
   process.exit(1);
 });

@@ -30,7 +30,7 @@ const dropAllTables = async () => {
 };
 
 // Run the function
-dropAllTables().catch(error => {
+dropAllTables().catch((error) => {
   console.error("Unexpected error:", error);
   process.exit(1);
 });

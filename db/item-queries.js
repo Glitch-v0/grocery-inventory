@@ -1,23 +1,27 @@
-const pool = require("./pool")
-
+const pool = require("./pool");
 
 async function addItem(name) {
-    const { rows } = await pool.query("INSERT INTO items (name) VALUES ($1) RETURNING *", [name]);
-    return rows
+  const { rows } = await pool.query(
+    "INSERT INTO items (name) VALUES ($1) RETURNING *",
+    [name],
+  );
+  return rows;
 }
 
 async function getAllItems() {
-    const { rows } = await pool.query("SELECT * FROM items ORDER BY name");
-    return rows;
+  const { rows } = await pool.query("SELECT * FROM items ORDER BY name");
+  return rows;
 }
 
-async function getItemByID(itemID){
-    const { rows } = await pool.query("SELECT * FROM items WHERE id = $1", [itemID]);
-    return rows[0];
+async function getItemByID(itemID) {
+  const { rows } = await pool.query("SELECT * FROM items WHERE id = $1", [
+    itemID,
+  ]);
+  return rows[0];
 }
 
-async function getItemDetails(itemID){
-    const query = `
+async function getItemDetails(itemID) {
+  const query = `
     SELECT 
         items.id,
         items.name,
@@ -40,30 +44,35 @@ async function getItemDetails(itemID){
         items.id = $1;
 `;
 
-
-        const { rows } = await pool.query(query, [itemID]);
-        return rows
+  const { rows } = await pool.query(query, [itemID]);
+  return rows;
 }
 
 async function updateItem(name, itemID, categories, regionPrices) {
-    await pool.query("UPDATE items SET name = $1 WHERE id = $2", [name, itemID]);
-    for (const category of categories) {
-        await pool.query("INSERT INTO item_categories (item_id, category_id) VALUES ($1, $2)", [itemID, category]);
-    }
-    for (const price of regionPrices) {
-        await pool.query("INSERT INTO regional_prices (item_id, region_id, price) VALUES ($1, $2, $3)", [itemID, region, 0]);
-    }
+  await pool.query("UPDATE items SET name = $1 WHERE id = $2", [name, itemID]);
+  for (const category of categories) {
+    await pool.query(
+      "INSERT INTO item_categories (item_id, category_id) VALUES ($1, $2)",
+      [itemID, category],
+    );
+  }
+  for (const price of regionPrices) {
+    await pool.query(
+      "INSERT INTO regional_prices (item_id, region_id, price) VALUES ($1, $2, $3)",
+      [itemID, region, 0],
+    );
+  }
 }
 
 async function deleteItem(itemID) {
-    await pool.query("DELETE FROM items WHERE id = $1", [itemID]);
+  await pool.query("DELETE FROM items WHERE id = $1", [itemID]);
 }
 
 module.exports = {
-    addItem,
-    getAllItems,
-    getItemByID,
-    getItemDetails,
-    updateItem,
-    deleteItem
-}
+  addItem,
+  getAllItems,
+  getItemByID,
+  getItemDetails,
+  updateItem,
+  deleteItem,
+};
