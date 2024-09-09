@@ -43,14 +43,14 @@
                 <tr>
                     <td><%= item.name %></td>
                     <td>
-                        <form action="/items/<%= item.id %>/" method="GET">
+                        <form action="/items/<%= item.id %>/" class="update-container" method="GET">
                             <button type="submit" style="background: none; border: none; cursor: pointer;">
                                 <img src="/update-icon.svg" alt="Update" style="width: 1.5rem; height: 1.5rem;">
                             </button>
                         </form>
                     </td>
                     <td>  
-                        <form action="/items/<%= item.id %>/delete" method="POST">
+                        <form action="/items/<%= item.id %>/delete" class="delete-container" method="POST">
                             <input type="hidden" name="_method" value="DELETE">
                             <button type="submit" style="background: none; border: none; cursor: pointer;">
                                 <img src="/delete-icon.svg" alt="Delete" style="width: 1.75rem; height: 1.75rem;">

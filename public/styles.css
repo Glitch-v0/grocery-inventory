@@ -143,7 +143,8 @@ img {
   border: none;
 }
 
-.delete-container > a {
+.delete-container,
+.update-container {
   display: grid;
   place-items: center;
 }
@@ -172,7 +173,6 @@ img {
 
   ul,
   label,
-  input,
   select {
     font-size: 1rem;
   }
@@ -188,5 +188,31 @@ img {
   table input,
   table button {
     width: 100%;
+  }
+
+  img {
+    margin: 0.4rem;
+  }
+
+  .update-form {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1.5fr 1fr;
+    gap: 0.5rem;
+  }
+
+  td {
+    padding: 0;
+    text-align: center;
+  }
+
+  th {
+    text-align: center;
+  }
+
+  input {
+    font-size: 0.75rem;
+    text-align: center;
+    background-color: rgb(236, 255, 249);
   }
 }
