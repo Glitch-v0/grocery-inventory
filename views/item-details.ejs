@@ -20,16 +20,18 @@
                     <td><label for="itemName">Item Name:</label></td>
                     <td><input type="text" id="itemName" name="itemName" value="<%= itemStats[0].name %>" disabled></td>
                 </tr>
-                <tr>
-                    <td><label for="category">Category:</label></td>
-                    <td>
-                        <select id="category" name="category" required disabled>
-                            <% categories.forEach(category => { %>
-                                <option value="<%= category.category %>" <%= itemStats[0].category === category.category ? 'selected' : '' %>><%= category.category %></option>
-                            <% }) %>
-                        </select>
-                    </td>
-                </tr>
+                <% itemCategories.forEach((category) => { %>
+                    <tr>
+                        <td><label for="category_<%= category.index %>">Category:</label></td>
+                        <td>
+                            <select id="category_<%= category.index %>" name="category_<%= category.index %>" required>
+                                <% categories.forEach(category => { %>
+                                    <option disabled value="<%= category.name %>" <%= category.name === itemStats[0].category ? 'selected' : '' %>><%= category.name %></option>
+                                <% }) %>
+                            </select>
+                        </td>
+                    </tr>
+                <% }) %>
                 <% itemStats.forEach((item, index) => { %>
                     <tr>
                         <td><label for="price-<%= index %>"><%= item.region_name %> Pricing ($):</label></td>

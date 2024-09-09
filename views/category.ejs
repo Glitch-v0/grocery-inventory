@@ -41,10 +41,10 @@
         <tbody>
             <% itemCategories.forEach(category => { %>
                 <tr>
-                    <td><%= category.category %></td>
+                    <td><%= category.name %></td>
                     <td>
                         <form action="/categories/<%= category.id %>/update" method="POST">
-                            <input type="text" name="updatedCategory" value="<%= category.category %>" required>
+                            <input type="text" name="updatedCategory" value="<%= category.name %>" required>
                             <button type="submit" style="background: none; border: none; cursor: pointer;">
                                 <img src="/update-icon.svg" alt="Update" style="width: 1.5rem; height: 1.5rem;">
                             </button>

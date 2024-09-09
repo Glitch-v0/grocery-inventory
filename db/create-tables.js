@@ -55,7 +55,7 @@ INSERT INTO categories (name) VALUES
 const insertIntoItems = `
 INSERT INTO items (name) VALUES
 
--- Fresh vegetables (Category ID 1)
+-- Fresh Vegetables (Category ID 1)
 ('Asparagus'),
 ('Beets'),
 ('Broccoli'),
@@ -76,7 +76,7 @@ INSERT INTO items (name) VALUES
 ('Tomatoes'),
 ('Zucchini'),
 
--- Fresh fruits (Category ID 2)
+-- Fresh Fruits (Category ID 2)
 ('Apples'),
 ('Avocado'),
 ('Bananas'),
@@ -92,30 +92,30 @@ INSERT INTO items (name) VALUES
 ('Pears'),
 ('Plums'),
 
--- Canned foods (Category ID 3)
+-- Canned Foods (Category ID 3)
 ('Canned Applesauce'),
-('Canned Baked beans'),
+('Canned Baked Beans'),
 ('Canned Beans'),
 ('Canned Carrots'),
 ('Canned Corn'),
-('Canned Mixed fruit'),
-('Canned Mixed veggies'),
+('Canned Mixed Fruit'),
+('Canned Mixed Veggies'),
 ('Canned Olives'),
-('Canned Pasta sauce'),
+('Canned Pasta Sauce'),
 ('Canned Pickles'),
-('Canned Refried beans'),
+('Canned Refried Beans'),
 ('Canned Tuna'),
 ('Canned Soup'),
 ('Canned Tomatoes'),
 
 -- Sauces (Category ID 4)
-('BBQ sauce'),
-('Hot sauce'),
+('BBQ Sauce'),
+('Hot Sauce'),
 ('Salsa'),
-('Soy sauce'),
-('Steak sauce'),
-('Sweet and sour Sauce'),
-('Worcestershire sauce'),
+('Soy Sauce'),
+('Steak Sauce'),
+('Sweet And Sour Sauce'),
+('Worcestershire Sauce'),
 
 -- Drinks (Category ID 5)
 ('Sparkling Water'),
@@ -126,8 +126,8 @@ INSERT INTO items (name) VALUES
 ('Honey'),
 ('Jelly'),
 ('Ketchup'),
-('Lemonaide'),
-('Limeaide'),
+('Lemonade'),
+('Limeade'),
 ('Coca Cola'),
 ('Pepsi'),
 ('Mt. Dew'),
@@ -139,28 +139,28 @@ INSERT INTO items (name) VALUES
 ('Mocktail'),
 ('Herbal Tea'),
 
--- Spices & herbs (Category ID 6)
+-- Spices & Herbs (Category ID 6)
 ('Basil'),
-('Black pepper'),
+('Black Pepper'),
 ('Cilantro'),
 ('Cinnamon'),
 ('Garlic'),
 ('Oregano'),
 ('Parsley'),
-('Red pepper'),
+('Red Pepper'),
 ('Salt'),
-('Vanilla extract'),
+('Vanilla Extract'),
 
 -- Oils/Vinegars (Category ID 7)
-('Apple cider vinegar'),
-('Balsamic vinegar'),
-('Salad dressing'),
-('Olive oil'),
-('Vegetable oil'),
-('White vinegar'),
+('Apple Cider Vinegar'),
+('Balsamic Vinegar'),
+('Salad Dressing'),
+('Olive Oil'),
+('Vegetable Oil'),
+('White Vinegar'),
 
--- Refrigerated items (Category ID 8)
-('Chip dip'),
+-- Refrigerated Items (Category ID 8)
+('Chip Dip'),
 ('Eggs'),
 ('Juice'),
 ('Tofu'),
@@ -168,50 +168,50 @@ INSERT INTO items (name) VALUES
 
 -- Dairy (Category ID 9)
 ('Butter'),
-('Half & half'),
-('Heavy cream'),
+('Half & Half'),
+('Heavy Cream'),
 ('Margarine'),
 ('Milk'),
-('Sour cream'),
-('Whipped cream'),
+('Sour Cream'),
+('Whipped Cream'),
 ('Yogurt'),
 
 -- Cheese (Category ID 10)
 ('Cheddar'),
-('Cottage cheese'),
-('Cream cheese'),
+('Cottage Cheese'),
+('Cream Cheese'),
 ('Feta'),
 ('Mozzarella'),
 ('Parmesan'),
 ('Pepper'),
 ('Provolone'),
 ('Ricotta'),
-('Sandwich slices'),
+('Sandwich Slices'),
 ('Shredded'),
 ('Swiss'),
 
 -- Frozen (Category ID 11)
 ('Frozen Burritos'),
 ('Frozen Desserts'),
-('Fish sticks'),
-('Ice cream'),
+('Fish Sticks'),
+('Ice Cream'),
 ('Juices'),
 ('Frozen Pizzas'),
 ('Popsicles'),
-('Tater tots'),
+('Tater Tots'),
 ('Sorbet'),
-('TV dinners'),
+('TV Dinners'),
 ('Frozen Vegetables'),
-('Frozen Veggie burgers'),
+('Frozen Veggie Burgers'),
 
 -- Meat (Category ID 12)
 ('Bacon'),
 ('Beef'),
 ('Chicken'),
-('Ground beef'),
-('Ground turkey'),
+('Ground Beef'),
+('Ground Turkey'),
 ('Ham'),
-('Hot dogs'),
+('Hot Dogs'),
 ('Pork'),
 ('Sausage'),
 ('Steak'),
@@ -219,7 +219,7 @@ INSERT INTO items (name) VALUES
 
 -- Seafood (Category ID 13)
 ('Catfish'),
-('Cocktail sauce'),
+('Cocktail Sauce'),
 ('Crab'),
 ('Halibut'),
 ('Oysters'),
@@ -228,7 +228,7 @@ INSERT INTO items (name) VALUES
 ('Tilapia'),
 ('Tuna'),
 
--- Baked goods (Category ID 14)
+-- Baked Goods (Category ID 14)
 ('Bagels'),
 ('Buns'),
 ('Cake'),
@@ -241,22 +241,22 @@ INSERT INTO items (name) VALUES
 ('Pie'),
 ('Pitas'),
 ('Rolls'),
-('Sliced bread'),
+('Sliced Bread'),
 
 -- Baking (Category ID 15)
-('Baking powder'),
-('Baking soda'),
-('Bread crumbs'),
-('Brown sugar'),
-('Cake decorations'),
-('Cake icing'),
-('Cake mix'),
-('Chocolate chips'),
+('Baking Powder'),
+('Baking Soda'),
+('Bread Crumbs'),
+('Brown Sugar'),
+('Cake Decorations'),
+('Cake Icing'),
+('Cake Mix'),
+('Chocolate Chips'),
 ('Cocoa'),
 ('Flour'),
 ('Oatmeal'),
-('Pie shell'),
-('Powdered sugar'),
+('Pie Shell'),
+('Powdered Sugar'),
 ('Shortening'),
 ('Sugar'),
 ('Yeast'),
@@ -264,16 +264,17 @@ INSERT INTO items (name) VALUES
 -- Snacks (Category ID 16)
 ('Candy'),
 ('Cookies'),
-('Dried fruit'),
-('Granola bars'),
+('Dried Fruit'),
+('Granola Bars'),
 ('Gum'),
 ('Nuts'),
 ('Popcorn'),
-('Potato chips'),
+('Potato Chips'),
 ('Pudding'),
 ('Pretzels'),
-('Tortilla chips');
+('Tortilla Chips');
 `
+
 const insertIntoItemCategories = `
 INSERT INTO item_categories (item_id, category_id) VALUES
 (1, 1),

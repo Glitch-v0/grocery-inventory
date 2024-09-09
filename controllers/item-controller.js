@@ -3,26 +3,29 @@ const router = express.Router();
 const itemDB = require("../db/item-queries");
 const categoryDB = require("../db/category-queries.js");
 
-async function getGroceryList (req, res) {
+async function getItems (req, res) {
     const groceryList = await itemDB.getList();
     res.render("items", {groceryItems: groceryList, error: null});
 }
 
-async function getGroceryItem (req, res) {
+async function getItemDetails (req, res) {
     const itemID = parseInt(req.params.id);
     if (!itemID) {
         return res.render("error", {errorCode: 404, errorMessage: "Invalid Page"});
     }
-    const groceryItem = await itemDB.getItemByID(itemID); // returns 4 rows
+    const itemDetails = await itemDB.getItemDetails(itemID); // returns 4 rows
+    const itemCategories = await categoryDB.getCategoriesByItemID(itemID);
     const categoryList = await categoryDB.getCategories();
-    if (groceryItem.length === 0) {
+    console.log({itemDetails})
+    console.log(itemCategories)
+    if (itemDetails.length === 0) {
         // Handle the case where no rows are found
         res.render("error", {errorCode: 404, errorMessage: "Item not found"});
       }
-    res.render("grocery-item", {itemStats: groceryItem, categories: categoryList});
+    res.render("item-details", {itemStats: itemDetails, categories: categoryList, itemCategories: itemCategories, error: null});
 }
 
-async function updateGroceryItem (req, res) {
+async function updateItem (req, res) {
     const itemID = parseInt(req.params.id);
     if (!itemID) {
         return res.render("error", {errorCode: 404, errorMessage: "Invalid Page"});
@@ -32,11 +35,11 @@ async function updateGroceryItem (req, res) {
         // Handle the case where no rows are found
         res.render("error", {errorCode: 404, errorMessage: "Item not found"});
       }
-    res.render("grocery-item", {itemStats: groceryItem, error: null});
+    res.render("item-details", {itemStats: groceryItem, error: null});
 }
 
 module.exports ={
-    getGroceryList,
-    getGroceryItem,
-    updateGroceryItem
+    getItems,
+    getItemDetails,
+    updateItem
 }
