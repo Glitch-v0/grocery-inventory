@@ -5,7 +5,7 @@ require("dotenv").config();
 const dropTables = `
 DROP TABLE IF EXISTS regional_prices;
 DROP TABLE IF EXISTS item_categories;
-DROP TABLE IF EXISTS warehouses;
+DROP TABLE IF EXISTS regions;
 DROP TABLE IF EXISTS items;
 DROP TABLE IF EXISTS categories;
 `;
