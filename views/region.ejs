@@ -13,16 +13,16 @@
     <% } %>
 
     <h1>Add a new category or modify an existing one.</h1>
-    <!-- Warehouse Addition Table -->
+    <!-- Region Addition Table -->
     <table>
         <thead>
             <tr>
-                <form action="/warehouses" method="POST">
+                <form action="/regions" method="POST">
                     <th>
-                        <label for="newWarehouse">Add New Warehouse</label>
+                        <label for="newRegion">Add New Region</label>
                     </th>
                     <td colspan="2">
-                        <input type="text" name="newWarehouse" id="newWarehouse" required>
+                        <input type="text" name="newRegion" id="newRegion" required>
                         <button type="submit">Add</button>
                     </td>
                 </form>
@@ -30,29 +30,29 @@
         </thead>
     </table>
 
-    <!-- Warehouse Modification Table -->
+    <!-- Region Modification Table -->
     <table>
         <thead>
             <tr>
-                <th>Warehouse</th>
+                <th>Region</th>
                 <th>Update</th>
                 <th>Delete</th>
             </tr>
         </thead>
         <tbody>
-            <% warehouses.forEach(warehouse => { %>
+            <% regions.forEach(region => { %>
                 <tr>
-                    <td><%= warehouse.region_name %></td>
+                    <td><%= region.name %></td>
                     <td>
-                        <form action="/warehouses/<%= warehouse.id %>" method="POST" class="update-form">
-                            <input type="text" name="newName" value="<%= warehouse.region_name %>" required>
+                        <form action="/regions/<%= region.id %>" method="POST" class="update-form">
+                            <input type="text" name="newRegion" value="<%= region.name %>" required>
                             <button type="submit" style="background: none; border: none; cursor: pointer;">
                                 <img src="/update-icon.svg" alt="Update" style="width: 1.5rem; height: 1.5rem;">
                             </button>
                         </form>
                     </td>
                     <td class="delete-container">
-                        <form action="/warehouses/<%= warehouse.id %>/delete" method="POST">
+                        <form action="/regions/<%= region.id %>/delete" method="POST">
                             <button type="submit" style="background: none; border: none; cursor: pointer;">
                                 <img src="/delete-icon.svg" alt="Delete" style="width: 1.75rem; height: 1.75rem;">
                             </button>

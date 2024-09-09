@@ -3,7 +3,7 @@ const path = require('node:path');
 const app = express();
 const itemsRouter = require('./routes/item-router');
 const categoriesRouter = require('./routes/category-router');
-const warehousesRouter = require('./routes/warehouse-router');
+const regionsRouter = require('./routes/region-router');
 
 // set up view engine
 app.set('views', path.join(__dirname, 'views'));
@@ -22,7 +22,7 @@ app.get('/', (req, res) => {
 });
 app.use('/items', itemsRouter);
 app.use('/categories', categoriesRouter);
-app.use('/warehouses', warehousesRouter);
+app.use('/regions', regionsRouter);
 app.get('/*', (req, res) => {
   res.render('error', { errorCode: 404, errorMessage: 'Invalid Page' });
 });
