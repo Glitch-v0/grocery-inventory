@@ -8,34 +8,32 @@ async function getRegions (req, res) {
     res.render("region", {regions: regionList, error: null});
 }
 
-async function addNewregion(req, res) {
+async function addRegion(req, res) {
     let newRegion = req.body.newRegion;
     newRegion = stringsMethods.removeNonAlphanumericAndAmpersand(newRegion)
     newRegion = stringsMethods.toTitleCase(newRegion)
     console.log(newRegion)
     try {
-        await db.addNewregion(newRegion);
+        await db.addRegion(newRegion);
         res.redirect("/regions");
     } catch (err) {
-        const regionList = await db.getregions();
+        const regionList = await db.getRegions();
         res.render("region", {regions: regionList, error: err});
     } 
 }
 
 async function updateRegion(req, res) {
-    let newName = req.body.newName;
-    console.log(newName)
+    let newName = req.body.newRegion;
     newName = stringsMethods.removeNonAlphanumericAndAmpersand(newName)
-    newName = stringsMethods.toTitleCase(newName)
-    const categoryID = parseInt(req.params.id);
+    const regionID = parseInt(req.params.id);
     try {
-        await db.updateRegion(newName, categoryID);
+        await db.updateRegion(newName, regionID);
         res.redirect("/regions");
     } catch {
         const regionList = await db.getRegions();
         res.render("region", {regions: regionList, error: err});
     }
-    console.log(categoryID)
+    console.log(regionID)
 }
 
 async function deleteRegion(req, res){
@@ -51,7 +49,7 @@ async function deleteRegion(req, res){
 
 module.exports = {
     getRegions,
-    addNewregion,
+    addRegion,
     updateRegion,
     deleteRegion
 }
