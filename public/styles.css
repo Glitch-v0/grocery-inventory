@@ -149,6 +149,16 @@ img {
   place-items: center;
 }
 
+.delete-connection-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  place-content: center;
+  place-items: center;
+  padding: 0;
+  gap: 0;
+  margin: 0;
+}
+
 .add-form > label {
   font-size: 2rem;
 }

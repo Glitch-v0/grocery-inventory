@@ -50,12 +50,18 @@ async function getItemDetails(req, res) {
 
 async function updateItem(req, res) {
   console.log(req.body);
-  const categoriesToAdd = [];
-  const { itemName, prices, regions, newCategory, ...otherCategories } =
-    req.body;
-  categoriesToAdd.push(newCategory, ...Object.values(otherCategories));
-  console.log({ categoriesToAdd });
+  const { itemName, prices, regions, ...otherCategories } = req.body;
   const itemID = parseInt(req.params.id);
+
+  const categoriesToAdd = [];
+  for (const category of Object.values(otherCategories)) {
+    if (category && category !== "DELETE") {
+      categoriesToAdd.push(category);
+    } else if (category === "DELETE") {
+      await connectionsDB.removeItemCategories(itemID);
+    }
+  }
+  console.log({ categoriesToAdd });
   if (!itemID) {
     return res.render("error", {
       errorCode: 404,

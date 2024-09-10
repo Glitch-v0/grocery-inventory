@@ -16,15 +16,19 @@
     <form action="/items/<%= id %>/update" method="POST" id="itemForm">
         <table>
             <tbody>
+                <th colspan="2">Item Details</th>
                 <tr>
                     <td><label for="itemName">Item Name:</label></td>
                     <td><input type="text" id="itemName" name="itemName" value="<%= itemStats[0].name %>" disabled></td>
                 </tr>
                 <% itemCategories.forEach((linkedCategory) => { %>
                     <tr>
-                        <td><label for="category_<%= linkedCategory.id %>">Category:</label></td>
+                        <td>
+                            <label for="category_<%= linkedCategory.id %>">Category:</label>
+                        </td>
                         <td>
                             <select id="category_<%= linkedCategory.id %>" name="category_<%= linkedCategory.id %>" required>
+                                <option>DELETE</option>
                                 <% categories.forEach(category => { %>
                                     <option value="<%= category.name %>" <%= category.name === linkedCategory.name ? 'selected' : '' %>>
                                         <%= category.name %>
@@ -45,12 +49,13 @@
                         </select>
                     </td>
                 </tr>
+                <th>Region</th><th>Pricing ($)</th>
                 <% regions.forEach((region, index) => { 
                     const itemDetail = itemStats.find(item => item.region_id === region.id);
                     const price = itemDetail ? itemDetail.price : '0.00';
                 %>
                     <tr>
-                        <td><label for="price-<%= index %>"><%= region.name %> Pricing ($):</label></td>
+                        <td><label for="price-<%= index %>"><%= region.name %></label></td>
                         <td>
                             <input type="text" id="price-<%= index %>" name="prices[<%= index %>]" 
                                    value="<%= price %>" disabled>
