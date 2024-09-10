@@ -61,7 +61,6 @@ async function updateItem(req, res) {
       await connectionsDB.removeItemCategories(itemID);
     }
   }
-  console.log({ categoriesToAdd });
   if (!itemID) {
     return res.render("error", {
       errorCode: 404,
@@ -78,12 +77,20 @@ async function updateItem(req, res) {
     await connectionsDB.removeItemCategories(itemID);
     for (const category of categoriesToAdd) {
       const categoryID = await categoryDB.getCategoryIDByName(category);
-      console.log(categoryID[0].id);
       await connectionsDB.createItemCategory(itemID, categoryID[0].id);
     }
   }
 
-  // Deal with regions
+  // Deal with prices
+  regions.forEach(async (region, index) => {
+    const regionID = await regionDB.getRegionIDByName(region);
+    const price = prices[index];
+    console.log(
+      `Passing price $${price} to region ${region} with ID-${regionID[0].id}`,
+    );
+    await connectionsDB.updatePrice(price, itemID, regionID[0].id);
+  });
+
   res.redirect("/items");
 }
 

@@ -11,7 +11,15 @@ async function createItemCategory(item_id, category_id) {
   );
 }
 
+async function updatePrice(price, item_id, region_id) {
+  await pool.query(
+    `UPDATE regional_prices SET price = $1 WHERE item_id = $2 AND region_id = $3`,
+    [price, item_id, region_id],
+  );
+}
+
 module.exports = {
   createItemCategory,
   removeItemCategories,
+  updatePrice,
 };

@@ -5,6 +5,13 @@ async function getRegions() {
   return rows;
 }
 
+async function getRegionIDByName(name) {
+  const { rows } = await pool.query("SELECT id FROM regions WHERE name = $1", [
+    name,
+  ]);
+  return rows;
+}
+
 async function updateRegion(name, id) {
   await pool.query("UPDATE regions SET name = $1 WHERE id = $2", [name, id]);
 }
@@ -20,6 +27,7 @@ async function deleteRegion(id) {
 module.exports = {
   addRegion,
   getRegions,
+  getRegionIDByName,
   updateRegion,
   deleteRegion,
 };
