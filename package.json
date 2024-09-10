@@ -9,6 +9,6 @@
     "prettier": "3.3.3"
   },
   "scripts": {
-    "reset": "node db/dropTables.js && node db/createTables.js && node --trace-warnings --watch app"
+    "reset": "node db/drop-tables.js && node db/create-tables.js && node --trace-warnings --watch app"
   }
 }

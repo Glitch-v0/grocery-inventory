@@ -3,6 +3,8 @@ const router = express.Router();
 const itemDB = require("../db/item-queries");
 const categoryDB = require("../db/category-queries.js");
 const regionDB = require("../db/region-queries");
+const connectionsDB = require("../db/connection-queries");
+const stringsMethods = require("../utils/stringMethods");
 
 async function addItem(req, res) {
   const itemName = req.body.newItem;
@@ -48,6 +50,11 @@ async function getItemDetails(req, res) {
 
 async function updateItem(req, res) {
   console.log(req.body);
+  const categoriesToAdd = [];
+  const { itemName, prices, regions, newCategory, ...otherCategories } =
+    req.body;
+  categoriesToAdd.push(newCategory, ...Object.values(otherCategories));
+  console.log({ categoriesToAdd });
   const itemID = parseInt(req.params.id);
   if (!itemID) {
     return res.render("error", {
@@ -55,6 +62,22 @@ async function updateItem(req, res) {
       errorMessage: "Invalid Page",
     });
   }
+  // Deal with item update first
+  newName = stringsMethods.removeNonAlphanumericAndAmpersand(itemName);
+  newName = stringsMethods.toTitleCase(itemName);
+  await itemDB.updateItemName(itemName, itemID);
+
+  // Deal with category update second
+  if (categoriesToAdd.length > 0) {
+    await connectionsDB.removeItemCategories(itemID);
+    for (const category of categoriesToAdd) {
+      const categoryID = await categoryDB.getCategoryIDByName(category);
+      console.log(categoryID[0].id);
+      await connectionsDB.createItemCategory(itemID, categoryID[0].id);
+    }
+  }
+
+  // Deal with regions
   res.redirect("/items");
 }
 

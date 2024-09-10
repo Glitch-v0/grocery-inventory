@@ -42,24 +42,19 @@ async function getItemDetails(itemID) {
   return rows;
 }
 
-async function updateItem(name, itemID, categories, regionPrices) {
-  await pool.query("UPDATE items SET name = $1 WHERE id = $2", [name, itemID]);
-  for (const category of categories) {
-    await pool.query(
-      "INSERT INTO item_categories (item_id, category_id) VALUES ($1, $2)",
-      [itemID, category],
-    );
-  }
-  for (const price of regionPrices) {
-    await pool.query(
-      "INSERT INTO regional_prices (item_id, region_id, price) VALUES ($1, $2, $3)",
-      [itemID, region, 0],
-    );
-  }
+async function updateItemName(name, itemID) {
+  const { rows } = await pool.query(
+    "UPDATE items SET name = $1 WHERE id = $2",
+    [name, itemID],
+  );
+  return rows;
 }
 
 async function deleteItem(itemID) {
-  await pool.query("DELETE FROM items WHERE id = $1", [itemID]);
+  const { rows } = await pool.query("DELETE FROM items WHERE id = $1", [
+    itemID,
+  ]);
+  return rows;
 }
 
 module.exports = {
@@ -67,6 +62,6 @@ module.exports = {
   getAllItems,
   getItemByID,
   getItemDetails,
-  updateItem,
+  updateItemName,
   deleteItem,
 };

@@ -5,6 +5,14 @@ async function getCategories() {
   return rows;
 }
 
+async function getCategoryIDByName(categoryName) {
+  const { rows } = await pool.query(
+    "SELECT id FROM categories WHERE name = $1",
+    [categoryName],
+  );
+  return rows;
+}
+
 async function getCategoriesByItemID(itemID) {
   const query = `
     SELECT name, id
@@ -35,6 +43,7 @@ async function deleteCategory(id) {
 module.exports = {
   addCategory,
   getCategories,
+  getCategoryIDByName,
   getCategoriesByItemID,
   updateCategory,
   deleteCategory,
