@@ -76,6 +76,11 @@ body {
   gap: 1rem;
 }
 
+.guest {
+  font-size: 1.5rem;
+  color: blueviolet;
+}
+
 #display-table {
   background-color: var(--highlight-color);
   align-content: center;
