@@ -11,9 +11,16 @@ async function createItemCategory(item_id, category_id) {
   );
 }
 
-async function updatePrice(price, item_id, region_id) {
+async function deletePrice(item_id, region_id) {
   await pool.query(
-    `UPDATE regional_prices SET price = $1 WHERE item_id = $2 AND region_id = $3`,
+    `DELETE FROM regional_prices WHERE item_id = $1 AND region_id = $2`,
+    [item_id, region_id],
+  );
+}
+
+async function createPrice(price, item_id, region_id) {
+  await pool.query(
+    `INSERT INTO regional_prices (price, item_id, region_id) VALUES ($1, $2, $3)`,
     [price, item_id, region_id],
   );
 }
@@ -21,5 +28,6 @@ async function updatePrice(price, item_id, region_id) {
 module.exports = {
   createItemCategory,
   removeItemCategories,
-  updatePrice,
+  deletePrice,
+  createPrice,
 };

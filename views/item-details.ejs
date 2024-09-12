@@ -8,18 +8,16 @@
 </head>
 <body>
     <%- include('partials/navbar') %>
+    <%- include('partials/error', { error: error }) %>
     <h1>Edit all information about the item below.</h1>
     
-    <!-- Edit Button to Unlock the Form -->
-    <button type="button" id="editButton">Edit Item Data</button>
-
     <form action="/items/<%= id %>/update" method="POST" id="itemForm">
         <table>
             <tbody>
                 <th colspan="2">Item Details</th>
                 <tr>
                     <td><label for="itemName">Item Name:</label></td>
-                    <td><input type="text" id="itemName" name="itemName" value="<%= itemStats[0].name %>" disabled></td>
+                    <td><input type="text" id="itemName" name="itemName" value="<%= itemStats[0].name %>" required></td>
                 </tr>
                 <% itemCategories.forEach((linkedCategory) => { %>
                     <tr>
@@ -42,9 +40,9 @@
                     <td><label for="newCategory">Add Category:</label></td>
                     <td>
                         <select id="newCategory" name="newCategory">
-                            <option value="" disabled selected>Select a category</option>
+                            <option value="" selected>Select a category</option>
                             <% categories.forEach(category => { %>
-                                <option disabled value="<%= category.name %>"><%= category.name %></option>
+                                <option value="<%= category.name %>"><%= category.name %></option>
                             <% }) %>
                         </select>
                     </td>
@@ -58,7 +56,7 @@
                         <td><label for="price-<%= index %>"><%= region.name %></label></td>
                         <td>
                             <input type="text" id="price-<%= index %>" name="prices[<%= index %>]" 
-                                   value="<%= price %>" disabled>
+                                   value="<%= price %>">
                         </td>
                         <input type="hidden" name="regions[<%= index %>]" value="<%= region.name %>">
                     </tr>
@@ -67,50 +65,11 @@
             </tbody>
         </table>
 
-        <button type="submit" id="submitButton" disabled>Update Item</button>
+        <button type="submit" id="submitButton">Update Item</button>
     </form>
 
     <a href="/items">
         <button type="button">Back</button>
     </a>
-
-    <script>
-        const editButton = document.getElementById('editButton');
-        const submitButton = document.getElementById('submitButton');
-        const formElements = document.querySelectorAll('#itemForm input[type="text"], #itemForm select, #itemForm option');
-        const rows = document.querySelectorAll('#itemForm table tbody tr');
-        const categorySelect = document.getElementById('category');
-
-        editButton.addEventListener('click', function() {
-            if (editButton.textContent === 'Edit Item Data') {
-                // Enable inputs and select, submit button
-                formElements.forEach(element => element.disabled = false);
-                submitButton.disabled = false;
-                editButton.textContent = 'Cancel';
-
-                // Hide rows with <span> elements (info-only rows)
-                rows.forEach(row => {
-                    const input = row.querySelector('input');
-                    if (input && input.disabled) {
-                        row.style.display = 'none';
-                    }
-                });
-            } else {
-                // Disable inputs and select, submit button
-                formElements.forEach(element => element.disabled = true);
-                submitButton.disabled = true;
-
-                // Revert button text
-                editButton.textContent = 'Edit Item Data';
-
-                // Show all rows
-                rows.forEach(row => row.style.display = '');
-
-                // Reset form data
-                document.getElementById('itemForm').reset();
-            }
-        });
-
-    </script>
 </body>
 </html>

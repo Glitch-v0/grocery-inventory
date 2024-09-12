@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const itemController = require("../controllers/item-controller");
+const authorization = require("../middleware/auth");
 
 router.get("/", itemController.getItems);
 router.post("/", itemController.addItem);

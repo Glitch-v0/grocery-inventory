@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const cookieParser = require("cookie-parser");
 const itemDB = require("../db/item-queries");
 const categoryDB = require("../db/category-queries.js");
 const regionDB = require("../db/region-queries");
@@ -67,12 +68,12 @@ async function updateItem(req, res) {
       errorMessage: "Invalid Page",
     });
   }
-  // Deal with item update first
+  // Handle item name
   newName = stringsMethods.removeNonAlphanumericAndAmpersand(itemName);
   newName = stringsMethods.toTitleCase(itemName);
   await itemDB.updateItemName(itemName, itemID);
 
-  // Deal with category update second
+  // Handle categories
   if (categoriesToAdd.length > 0) {
     await connectionsDB.removeItemCategories(itemID);
     for (const category of categoriesToAdd) {
@@ -81,14 +82,16 @@ async function updateItem(req, res) {
     }
   }
 
-  // Deal with prices
+  // Handle prices
   regions.forEach(async (region, index) => {
     const regionID = await regionDB.getRegionIDByName(region);
+    console.log(regionID);
+    await connectionsDB.deletePrice(itemID, regionID[0].id);
     const price = prices[index];
     console.log(
       `Passing price $${price} to region ${region} with ID-${regionID[0].id}`,
     );
-    await connectionsDB.updatePrice(price, itemID, regionID[0].id);
+    await connectionsDB.createPrice(price, itemID, regionID[0].id);
   });
 
   res.redirect("/items");
