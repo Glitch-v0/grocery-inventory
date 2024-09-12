@@ -6,7 +6,15 @@ const authorization = require("../middleware/auth");
 router.get("/", itemController.getItems);
 router.post("/", itemController.addItem);
 router.get("/:id", itemController.getItemDetails);
-router.post("/:id/update", itemController.updateItem);
-router.post("/:id/delete", itemController.deleteItem);
+router.post(
+  "/:id/update",
+  authorization.checkAdminStatus,
+  itemController.updateItem,
+);
+router.post(
+  "/:id/delete",
+  authorization.checkAdminStatus,
+  itemController.deleteItem,
+);
 
 module.exports = router;

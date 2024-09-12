@@ -1,11 +1,11 @@
-const checkPassword = (req, res, next) => {
-  const password = req.cookies["password"];
+const checkAdminStatus = (req, res, next) => {
+  const admin = req.cookies.admin;
 
-  if (password !== "correct_password") {
-    return res.status(403).send("Forbidden: Incorrect password");
+  if (admin !== "true") {
+    return res.render("index", { error: "You do not have admin access." });
   }
 
   next(); // Proceed to the next middleware or route handler
 };
 
-module.exports = { checkPassword };
+module.exports = { checkAdminStatus };

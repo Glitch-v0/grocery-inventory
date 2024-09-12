@@ -2,6 +2,7 @@ const express = require("express");
 const path = require("node:path");
 const app = express();
 require("dotenv").config();
+const cookieParser = require("cookie-parser");
 const itemsRouter = require("./routes/item-router");
 const categoriesRouter = require("./routes/category-router");
 const regionsRouter = require("./routes/region-router");
@@ -12,6 +13,7 @@ app.set("view engine", "ejs");
 
 // set up middleware to parse form data
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 // serve static files
 const assetsPath = path.join(__dirname, "public");
@@ -19,11 +21,15 @@ app.use(express.static(assetsPath));
 
 // set up routes
 app.get("/", (req, res) => {
+  if (req.cookies.admin == null) {
+    res.cookie("admin", "false");
+  }
   res.render("index", { error: null });
 });
 app.post("/", (req, res) => {
   const password = req.body.password;
   console.log(password, process.env.ADMIN_PASS);
+  // Creates admin cookie
   if (password == process.env.ADMIN_PASS) {
     res.cookie("admin", "true", {
       maxAge: 24 * 60 * 60 * 1000, // 24 hours

@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const cookieParser = require("cookie-parser");
 const itemDB = require("../db/item-queries");
 const categoryDB = require("../db/category-queries.js");
 const regionDB = require("../db/region-queries");
@@ -50,6 +49,9 @@ async function getItemDetails(req, res) {
 }
 
 async function updateItem(req, res) {
+  if (req.cookies.admin !== "true") {
+    return res.render("index", { error: "You do not have admin access." });
+  }
   console.log(req.body);
   const { itemName, prices, regions, ...otherCategories } = req.body;
   const itemID = parseInt(req.params.id);
